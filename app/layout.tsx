@@ -14,7 +14,7 @@ const fontDisplay = FontDisplay({
 
 export const metadata = {
   metadataBase: new URL(defaultUrl),
-  title: "00",
+  title: "twassul",
   description: "The fastest way to build apps with Next.js and Supabase",
 };
 
@@ -38,7 +38,7 @@ export default function RootLayout({
             <Menu />
           </section>
           <section className={`w-2/3 pl-1 flex justify-center max-lg:w-full`}>
-            <div className={`max-lg:w-3/4 w-full`}>{children}</div>
+            <div className={`max-lg:w-3/4 w-full max-sm:w-full`}>{children}</div>
           </section>
         </main>
       </body>
