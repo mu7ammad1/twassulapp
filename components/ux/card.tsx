@@ -99,7 +99,7 @@ export default function Card({
         <div className={"flex flex-col justify-center my-2"}>
           <div>
             {pollOptions && pollOptions.length > 0 && (
-              <>
+              <div>
                 {pollOptions.map((option: any, index: number) => (
                   <Button
                     key={index}
@@ -110,14 +110,14 @@ export default function Card({
                     {option}
                   </Button>
                 ))}
-              </>
+              </div>
             )}
           </div>
           <Carousel className={`basis-full `}>
             <CarouselContent className={`basis-full max-h-80`}>
               {photos?.map((id: any) => (
                 <CarouselItem key={id} className={`basis-auto`}>
-                  <ImageDisplayView imageName={id} />
+                  <ImageDisplayView imageName={id.slice(7, 25)} />
                 </CarouselItem>
               ))}
             </CarouselContent>

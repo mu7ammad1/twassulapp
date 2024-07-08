@@ -4,7 +4,11 @@ import { createClient } from "@/utils/supabase/server";
 import { redirect } from "next/navigation";
 import { SubmitButton } from "./submit-button";
 
-export default function Login({ searchParams }: { searchParams: { message: string } }) {
+export default function Login({
+  searchParams,
+}: {
+  searchParams: { message: string };
+}) {
   const signIn = async (formData: FormData) => {
     "use server";
 
@@ -47,7 +51,7 @@ export default function Login({ searchParams }: { searchParams: { message: strin
 
     // إنشاء ملف شخصي جديد
     const { error: profileError } = await supabase
-      .from('profiles')
+      .from("profile")
       .insert([{ id: user.user?.id, username: username }]);
 
     if (profileError) {
@@ -132,4 +136,3 @@ export default function Login({ searchParams }: { searchParams: { message: strin
     </div>
   );
 }
-

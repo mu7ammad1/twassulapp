@@ -5,12 +5,12 @@ import New from "@/components/ux/new";
 import Card from "@/components/ux/card";
 import { GetServerSideProps } from "next";
 
-// Type definitions for posts and profiles
+// Type definitions for posts and profile
 type Post = {
   id: any;
   created_at: any;
   update_at?: any;
-  post_id_user: any;
+  user_id: any;
   content: any;
   photo_urls?: any[];
   published: any;
@@ -52,17 +52,17 @@ export default async function Home() {
   }
 
   // Fetch profile data with avatars and isValid
-  const { data: profiles, error: profileError } = await supabase
+  const { data: profile, error: profileError } = await supabase
     .from("profile")
     .select("username, avatar, isValid");
 
   if (profileError) {
     console.error(profileError);
-    return <div>Error fetching profiles</div>;
+    return <div>Error fetching profile</div>;
   }
 
   // Create a map of avatars and isValid by username
-  const profileMap = profiles.reduce(
+  const profileMap = profile.reduce(
     (
       acc: { [key: string]: { avatar?: string; isValid: boolean } },
       profile
@@ -85,22 +85,15 @@ export default async function Home() {
             pollOptions={post.poll_options}
             id={post.id}
             created={post.created_at}
-            id_user={post.post_id_user}
+            id_user={post.user_id}
             contents={post.content}
             photos={post.photo_urls}
             publish={post.published}
-            avatar={profileMap[post.post_id_user]?.avatar}
-            Valid={profileMap[post.post_id_user]?.isValid}
+            avatar={profileMap[post.user_id]?.avatar}
+            Valid={profileMap[post.user_id]?.isValid}
           />
         </div>
       ))}
-      <div className="flex-1 w-full flex flex-col gap-20 items-center">
-        <nav className="w-full flex justify-center border-b border-b-foreground/10 h-16">
-          <div className="w-full max-w-4xl flex justify-between items-center p-3 text-sm">
-            {isSupabaseConnected && <AuthButton />}
-          </div>
-        </nav>
-      </div>
     </main>
   );
 }

@@ -1,15 +1,11 @@
-import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import Card from "@/components/ux/card";
-import photo1 from "~/image/pexels-curiosophotography-288100.jpg";
 import { cn } from "@/lib/utils";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { createClient } from "@/utils/supabase/server";
 
-import Vv from "@/components/ux/vv";
+
 import AvatarProfile from "@/components/ux/avatarProfile";
-import Avatar_card_profile from "@/components/ux/avatar_card_profile";
 
 export default async function Page({ params }: { params: { slug: string } }) {
   const supabase = createClient();
@@ -47,7 +43,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
   const { data: posts, error: postError } = await supabase
     .from("post")
     .select()
-    .eq("post_id_user", `${params.slug}`);
+    .eq("user_id", `${params.slug}`);
 
   if (postError) {
     console.error(postError);
@@ -169,7 +165,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
                       id,
                       created_at,
                       update_at,
-                      post_id_user,
+                      user_id,
                       content,
                       photo_urls,
                       published,
@@ -183,11 +179,11 @@ export default async function Page({ params }: { params: { slug: string } }) {
                           pollOptions={poll_options}
                           id={id}
                           created={created_at}
-                          id_user={post_id_user}
+                          id_user={user_id}
                           contents={content}
                           photos={photo_urls}
                           publish={published}
-                          avatar={avatarMap[post_id_user]} // Adding avatar to the Card component
+                          avatar={avatarMap[user_id]} // Adding avatar to the Card component
                         />
                       </div>
                     )

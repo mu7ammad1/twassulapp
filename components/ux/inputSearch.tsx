@@ -12,12 +12,12 @@ const supabase = createClient(
 
 function InputSearch() {
   const [value, setValue] = useState("");
-  const [profiles, setProfiles] = useState([]);
+  const [profile, setProfile] = useState([]);
 
   useEffect(() => {
-    const fetchProfiles = async () => {
+    const fetchProfile = async () => {
       if (value.trim() === "") {
-        setProfiles([]);
+        setProfile([]);
         return;
       }
 
@@ -27,13 +27,13 @@ function InputSearch() {
         .gte("username", `${value}`);
 
       if (error) {
-        console.error("Error fetching profiles:", error);
+        console.error("Error fetching profile:", error);
       } else {
-        setProfiles(data);
+        setProfile(data);
       }
     };
 
-    fetchProfiles();
+    fetchProfile();
   }, [value]);
 
   return (
@@ -47,7 +47,7 @@ function InputSearch() {
         value={value}
         onChange={(e) => setValue(e.target.value)}
       />
-      {profiles?.map(({ id, username, isValid, avatar }) => (
+      {profile?.map(({ id, username, isValid, avatar }) => (
         <div key={id} className={`mb-1 text-white`}>
           <div
             className={

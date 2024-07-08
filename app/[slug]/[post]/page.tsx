@@ -67,7 +67,7 @@ export default async function Page({ params }: { params: { post: string } }) {
             id,
             created_at,
             update_at,
-            post_id_user,
+            user_id,
             content,
             photo_urls,
             published,
@@ -81,12 +81,12 @@ export default async function Page({ params }: { params: { post: string } }) {
                 pollOptions={poll_options}
                 id={id}
                 created={created_at}
-                id_user={post_id_user}
+                id_user={user_id}
                 contents={content}
                 photos={photo_urls}
                 publish={published}
-                avatar={avatarMap[post_id_user]?.avatar} // Add avatar from the profileMap
-                Valid={avatarMap[post_id_user]?.isValid} // Add isValid from the profileMap
+                avatar={avatarMap[user_id]?.avatar} // Add avatar from the profileMap
+                Valid={avatarMap[user_id]?.isValid} // Add isValid from the profileMap
               />
             </div>
           )

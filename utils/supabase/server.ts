@@ -34,3 +34,7 @@ export const createClient = () => {
     }
   );
 };
+
+export const generateRandomNumber = () => {
+  return Math.floor(1000 + Math.random() * 9000); // رقم عشوائي مكون من 4 أرقام
+};
