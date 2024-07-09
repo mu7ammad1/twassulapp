@@ -61,7 +61,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
       {profile?.map(({ id, name, username, bio, avatar, isValid }: any) => (
         <div key={id} className={`mb-5`}>
           <section className={cn(`w-full flex justify-between items-center`)}>
-            <div className={`w-full px-16 flex justify-between items-center`}>
+            <div className={`w-full px-16 max-md:px-10 max-sm:p-2 flex justify-between items-center`}>
               <div className={`text-center`}>
                 <p className={`text-xl font-normal`}>{posts?.length}</p>
                 <p className={`text-base text-stone-500 font-medium`}>

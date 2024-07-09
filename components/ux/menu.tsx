@@ -3,11 +3,12 @@ import Link from "next/link";
 import { Button } from "../ui/button";
 import { usePathname } from "next/navigation";
 
-export default function Menu() {
+export default async function Menu() {
   const pathname = usePathname();
+
   return (
     <div
-      className={`px-5 max-lg:px-0 max-lg:w-3/4 flex flex-col max-lg:flex-row  w-full sticky top-3 max-lg:justify-center max-lg:flex max-lg:items-center`}
+      className={`px-5 max-sm:w-full max-lg:px-0 max-lg:w-3/4 flex flex-col max-lg:flex-row  w-full sticky top-3 max-lg:justify-center max-lg:flex max-lg:items-center`}
     >
       <div
         className={`max-lg:*:w-full max-lg:w-full max-lg:mr-5 flex flex-col max-lg:flex-row max-lg:justify-center max-lg:items-center max-lg:*:*:w-full max-lg:*:*:rounded-none *:*:max-lg:my-0`}
@@ -136,12 +137,12 @@ export default function Menu() {
             </svg>
           </Button>
         </Link>
-        <Link href={`/@mu7amm.ad`}>
+        <Link href={`/profile`}>
           <Button
             variant="outline"
             size={"default"}
             className={`border-none rounded-full shadow-none text-lg my-1 py-6 hover:bg-white ${
-              pathname === `/@mu7amm.ad`
+              pathname === `/profile`
                 ? "bg-white text-stone-800"
                 : "bg-stone-800"
             }`}

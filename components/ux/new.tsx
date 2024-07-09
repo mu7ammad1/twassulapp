@@ -7,7 +7,6 @@ import { redirect } from "next/navigation";
 import Link from "next/link";
 import { SubmitButton } from "@/app/login/submit-button";
 
-
 export default async function News(avatar: any) {
   const supabase = createClient();
   const {
@@ -17,7 +16,7 @@ export default async function News(avatar: any) {
 
   if (userError) {
     console.error("Error fetching user:", userError);
-    return <div>Error fetching user information</div>;
+    return <div>Error fetching user information in New.js</div>;
   }
 
   if (user) {
@@ -110,7 +109,7 @@ export default async function News(avatar: any) {
               placeholder="Tell us a little bit about yourself"
               className="resize-none text-right flex justify-start border-none focus-visible:ring-0 bg-stone-500/0 placeholder:text-stone-500 focus-visible:shadow-red-50/0 ring-0 focus:ring-0"
               required
-              dir="rtl"
+              dir="auto"
             />
             <input
               type="file"

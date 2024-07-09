@@ -1,20 +1,20 @@
 import Link from "next/link";
-
 import {
   Carousel,
   CarouselContent,
   CarouselItem,
 } from "@/components/ui/carousel";
-
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-
 import { formatDistanceToNow, parseISO } from "date-fns";
 import { Button } from "../ui/button";
 import { cn } from "@/lib/utils";
 import ImageDisplayView from "./imageDisplayView";
 import Avatar_card_profile from "./avatar_card_profile";
-import Insert from "./_post/insert";
 import SaveBTN from "./SaveBTN";
+import dynamic from "next/dynamic";
+
+const LinkA = dynamic(() => import("./LinkA"), {
+  ssr: false,
+});
 
 export default function Card({
   id,
@@ -35,7 +35,7 @@ export default function Card({
         <div className={`flex items-center`}>
           <div className={`p-0 m-0 flex`}>
             <Avatar_card_profile imageName={avatar} />
-            {Valid == true ? (
+            {Valid === true ? (
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
@@ -66,13 +66,11 @@ export default function Card({
           <span className={`text-xs text-stone-500`}>{timeAgo}</span>
         </div>
         <div className={`flex justify-center items-center gap-2`}>
-          <Button
-            variant={"outline"}
-            size={"sm"}
-            className={`shadow-none hover:bg-white bg-white text-stone-800 rounded-full border-none`}
+          <span
+            className={`text-xs bg-white p-1 px-3 font-medium rounded-xl text-stone-900`}
           >
             متابعة
-          </Button>
+          </span>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -93,8 +91,9 @@ export default function Card({
         <Link
           href={`/${id_user}/${id}`}
           className={`line-clamp-3	text-sm font-light text-right`}
+          dir="auto"
         >
-          {contents}
+          <LinkA params={contents} id_user={id_user} id={id} />
         </Link>
         <div className={"flex flex-col justify-center my-2"}>
           <div>

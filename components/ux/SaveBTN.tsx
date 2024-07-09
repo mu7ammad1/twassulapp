@@ -1,9 +1,20 @@
 import { SubmitButton } from "@/app/login/submit-button";
 import { createClient } from "@/utils/supabase/server";
+import { redirect } from "next/navigation";
 
 export default async function SaveBTN({ username, link }: any) {
   const supabase = createClient();
 
+
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  if (!user) {
+    return redirect("/login");
+  }
+
+  
   const Insert = async (formData: FormData) => {
     "use server";
 

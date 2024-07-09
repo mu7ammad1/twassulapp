@@ -14,7 +14,7 @@ export default async function AuthButton() {
 
   if (userError) {
     console.error("Error fetching user:", userError);
-    return <div>Error fetching user information</div>;
+    return <div>Error fetching user information in AuthButton</div>;
   }
 
   if (user) {
