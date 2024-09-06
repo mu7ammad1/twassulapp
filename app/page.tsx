@@ -17,7 +17,6 @@ type Post = {
   poll_options?: any;
   poll_votes?: any;
   avatar_id?: any;
-  risk?: any;
 };
 
 type Profile = {
@@ -53,8 +52,8 @@ export default async function Home() {
 
   // Fetch profile data with avatars and isValid
   const { data: profile, error: profileError } = await supabase
-    .from("profile")
-    .select("username, avatar, isValid");
+    .from("profiles")
+    .select("username, avatar_url, isValid");
 
   if (profileError) {
     console.error(profileError);
@@ -68,7 +67,7 @@ export default async function Home() {
       profile
     ) => {
       acc[profile.username] = {
-        avatar: profile.avatar,
+        avatar: profile.avatar_url,
         isValid: profile.isValid,
       };
       return acc;

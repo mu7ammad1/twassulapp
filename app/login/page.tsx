@@ -61,7 +61,7 @@ export default async function Login({
 
     // إنشاء ملف شخصي جديد
     const { error: profileError } = await supabase
-      .from("profile")
+      .from("profiles")
       .insert([{ id: user.user?.id, username: username }]);
 
     if (profileError) {

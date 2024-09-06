@@ -22,7 +22,7 @@ export default async function News(avatar: any) {
   if (user) {
     // تحقق من وجود ملف شخصي
     const { data: profile, error: profileError } = await supabase
-      .from("profile")
+      .from("profiles")
       .select("*")
       .eq("id", user.id)
       .single();
@@ -35,7 +35,7 @@ export default async function News(avatar: any) {
     if (!profile) {
       // إنشاء ملف شخصي إذا لم يكن موجوداً
       const { error: insertError } = await supabase
-        .from("profile")
+        .from("profiles")
         .insert([{ id: user.id, username: `username_${Date.now()}` }])
         .single();
 
@@ -46,7 +46,7 @@ export default async function News(avatar: any) {
     }
 
     const { data: updatedProfile, error: updatedProfileError } = await supabase
-      .from("profile")
+      .from("profiles")
       .select("*")
       .eq("id", user.id)
       .single();

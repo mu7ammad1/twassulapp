@@ -12,7 +12,7 @@ export default async function Page({ params }: { params: { post: string } }) {
   const supabase = createClient();
 
   const { data: profile, error: profileError } = await supabase
-    .from("profile")
+    .from("profiles")
     .select();
 
   if (profileError) {

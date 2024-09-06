@@ -10,8 +10,8 @@ import AvatarProfile from "@/components/ux/avatarProfile";
 export default async function Page({ params }: { params: { slug: string } }) {
   const supabase = createClient();
 
-  const { data: profile, error: profileError } = await supabase
-    .from("profile")
+  const { data: profiles, error: profileError } = await supabase
+    .from("profiles")
     .select()
     .eq("username", `${params.slug}`);
 
@@ -51,14 +51,14 @@ export default async function Page({ params }: { params: { slug: string } }) {
   }
 
   // Create a map of avatars by username
-  const avatarMap = profile.reduce((acc, profile) => {
+  const avatarMap = profiles.reduce((acc, profile) => {
     acc[profile.username] = profile.avatar;
     return acc;
   }, {});
 
   return (
     <main>
-      {profile?.map(({ id, name, username, bio, avatar, isValid }: any) => (
+      {profiles?.map(({ id, full_name, username, bio, avatar, isValid }: any) => (
         <div key={id} className={`mb-5`}>
           <section className={cn(`w-full flex justify-between items-center`)}>
             <div className={`w-full px-16 max-md:px-10 max-sm:p-2 flex justify-between items-center`}>
@@ -99,7 +99,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
                   />
                 </svg>
               ) : null}
-              {name}
+              {full_name}
             </h2>
             <h2 className={`text-sm font-normal`}>@{username}</h2>
             <h2 className={`text-sm font-normal my-3`}>{bio}</h2>
@@ -111,27 +111,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
           >
             <Button
               variant={"outline"}
-              size={"default"}
-              className={`text-base font-normal w-auto bg-stone-800 border-none`}
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth={1.5}
-                stroke="currentColor"
-                className="size-6"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M7.217 10.907a2.25 2.25 0 1 0 0 2.186m0-2.186c.18.324.283.696.283 1.093s-.103.77-.283 1.093m0-2.186 9.566-5.314m-9.566 7.5 9.566 5.314m0 0a2.25 2.25 0 1 0 3.935 2.186 2.25 2.25 0 0 0-3.935-2.186Zm0-12.814a2.25 2.25 0 1 0 3.933-2.185 2.25 2.25 0 0 0-3.933 2.185Z"
-                />
-              </svg>
-            </Button>
-            <Button
-              variant={"outline"}
-              size={"default"}
+              size={"sm"}
               className={`text-base font-normal w-full border-white text-stone-800 border-none`}
             >
               متابعة

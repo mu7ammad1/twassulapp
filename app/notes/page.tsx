@@ -11,17 +11,15 @@ export default async function Page() {
     <main>
       <div className={`w-full`}>
         {save?.length}
-        {/* {save?.map(({ username, id, like_post }) => (
+        {save?.map(({ username, id, like_post }) => (
           <div key={id} className={`mb-5 text-yellow-500`}>
             {id === 3 ? `` : ``}
             <p className={`bg-stone-100 p-3 mb-1 rounded-lg`}>
               {id} === {username} === {like_post}
             </p>
           </div>
-        ))} */}
+        ))}
         <Insert />
-        {/* <Vv />
-        <V imageName='1719955822316_251698' /> */}
       </div>
     </main>
   );

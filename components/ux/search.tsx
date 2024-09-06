@@ -8,13 +8,13 @@ import InputSearch from "./inputSearch";
 
 export default async function Search() {
   const supabase = createClient();
-  const { data: profile } = await supabase.from("profile").select().limit(19);
+  const { data: profile } = await supabase.from("profiles").select().limit(19);
 
   return (
     <div className={`w-full bg-stone-950 sticky top-3`}>
       <div className={`w-full mt-1`}>
         <InputSearch />
-        {profile?.map(({ id, username, isValid, avatar }) => (
+        {/* {profile?.map(({ id, username, isValid, avatar_url }) => (
           <div key={id} className={`mb-1 text-white`}>
             <div
               className={
@@ -22,12 +22,12 @@ export default async function Search() {
               }
             >
               <div className={`flex items-center gap-2`}>
-                <Avatar_card_profile imageName={avatar} />
+                <Avatar_card_profile imageName={avatar_url} />
                 <Link
                   href={`/${username}`.toLowerCase()}
                   className={`text-base lowercase`}
                 >
-                  {username}
+                  @{username}
                 </Link>
                 {isValid === true ? (
                   <svg
@@ -66,7 +66,7 @@ export default async function Search() {
               </Button>
             </div>
           </div>
-        ))}
+        ))} */}
       </div>
     </div>
   );

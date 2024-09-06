@@ -20,7 +20,7 @@ export default async function AuthButton() {
   if (user) {
     // تحقق من وجود ملف شخصي
     const { data: profile, error: profileError } = await supabase
-      .from("profile")
+      .from("profiles")
       .select("*")
       .eq("id", user.id)
       .single();
@@ -34,7 +34,7 @@ export default async function AuthButton() {
     if (!profile) {
       // إنشاء ملف شخصي إذا لم يكن موجوداً
       const { error: insertError } = await supabase
-        .from("profile")
+        .from("profiles")
         .insert([{ id: user.id, username: "New User" }]); // يمكنك تعديل اسم المستخدم الافتراضي إذا لزم الأمر
 
       if (insertError) {
@@ -44,7 +44,7 @@ export default async function AuthButton() {
     }
 
     const { data: updatedProfile, error: updatedProfileError } = await supabase
-      .from("profile")
+      .from("profiles")
       .select("*")
       .eq("id", user.id)
       .single();
