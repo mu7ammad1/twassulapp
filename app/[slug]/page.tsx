@@ -1,19 +1,24 @@
-import { Button } from "@/components/ui/button";
 import Card from "@/components/ux/card";
 import { cn } from "@/lib/utils";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { createClient } from "@/utils/supabase/server";
 
 import AvatarProfile from "@/components/ux/avatarProfile";
+import FollowBTN from "./followBTN";
 
 export default async function Page({ params }: { params: { slug: string } }) {
   const supabase = createClient();
 
   const { data: profile, error } = await supabase
     .from("profiles")
-    .select("*, posts (*)")
+    .select(`*, posts (*), love (*)`)
     .eq("username", `${params.slug}`)
     .single();
+
+  const { data: follow } = await supabase
+    .from("follows")
+    .select(`*`)
+    .eq("following_id", `${profile.id}`)
 
   if (error) {
     console.error(error);
@@ -32,16 +37,14 @@ export default async function Page({ params }: { params: { slug: string } }) {
               <p className={`text-base text-stone-500 font-medium`}>منشورات</p>
             </div>
             <div className={`text-center`}>
-              <p className={`text-xl font-normal`}>
-                {profile?.follower_id?.length}
-              </p>
+              <p className={`text-xl font-normal`}>{follow?.length}</p>
               <p className={`text-base text-stone-500 font-medium`}>يتابع</p>
             </div>
             <div className={`text-center`}>
               <p className={`text-xl font-normal`}>
-                {profile?.following_id?.length}
+                {profile?.love?.length}
               </p>
-              <p className={`text-base text-stone-500 font-medium`}>متابع</p>
+              <p className={`text-base text-stone-500 font-medium`}>اعجابات</p>
             </div>
           </div>
           <div className={`relative`}>
@@ -60,7 +63,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
                 fill="currentColor"
-                className="size-5 text-emerald-500"
+                className="size-5 text-white"
               >
                 <path
                   fillRule="evenodd"
@@ -76,16 +79,10 @@ export default async function Page({ params }: { params: { slug: string } }) {
         </section>
         <section
           className={cn(
-            `w-full my-5 text-right flex justify-center items-center gap-3`
+            `w-full my-0 text-right flex justify-center items-center gap-3`
           )}
         >
-          <Button
-            variant={"outline"}
-            size={"sm"}
-            className={`text-base font-normal w-full border-white text-stone-800 border-none`}
-          >
-            متابعة
-          </Button>
+          <FollowBTN username={profile?.id} />
         </section>
         <section
           className={cn(

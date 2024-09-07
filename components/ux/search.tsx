@@ -14,11 +14,11 @@ export default async function Search() {
     <div className={`w-full bg-stone-950 sticky top-3`}>
       <div className={`w-full mt-1`}>
         <InputSearch />
-        {/* {profile?.map(({ id, username, isValid, avatar_url }) => (
+        {profile?.map(({ id, username, isValid, avatar_url }) => (
           <div key={id} className={`mb-1 text-white`}>
             <div
               className={
-                "w-full border-none shadow-none rounded-lg my-1 bg-stone-700 p-2 flex justify-between"
+                "w-full border-none shadow-none rounded-lg my-1 bg-stone-800 p-2 flex justify-between"
               }
             >
               <div className={`flex items-center gap-2`}>
@@ -66,7 +66,7 @@ export default async function Search() {
               </Button>
             </div>
           </div>
-        ))} */}
+        ))}
       </div>
     </div>
   );
