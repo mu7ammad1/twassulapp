@@ -61,7 +61,7 @@ export default function Card({
             href={`/${id_user}`.toLowerCase()}
             className={`text-base lowercase -translate-x-2`}
           >
-            {id_user}
+            <p>@{id_user}</p>
           </Link>
           <span className={`text-xs text-stone-500`}>{timeAgo}</span>
         </div>
@@ -89,11 +89,11 @@ export default function Card({
       </div>
       <div className={`py-2 pt-3`}>
         <Link
-          href={`/${id_user}/${id}`}
+          href={`/${id}`}
           className={`line-clamp-3	text-sm font-light text-right`}
           dir="auto"
         >
-          <LinkA params={contents} id_user={id_user} id={id} />
+          <LinkA params={contents} id={id} />
         </Link>
         <div className={"flex flex-col justify-center my-2"}>
           <div>

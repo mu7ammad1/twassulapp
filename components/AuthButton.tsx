@@ -20,7 +20,9 @@ export default async function AuthButton() {
   if (user) {
     // تحقق من وجود ملف شخصي
     const { data: profile, error: profileError } = await supabase
-      .from("profiles")
+      .from(
+        `profiles`
+      )
       .select("*")
       .eq("id", user.id)
       .single();

@@ -1,26 +1,28 @@
 import Insert from "@/components/ux/_post/insert";
-import V from "@/components/ux/v";
-import Vv from "@/components/ux/vv";
 import { createClient } from "@/utils/supabase/server";
 
 export default async function Page() {
   const supabase = createClient();
-  const { data: save } = await supabase.from("save").select()
+
+  // استخدم العلاقة واحد إلى واحد
+  const { data: save, error } = await supabase
+    .from("cities")
+    .select(`
+      id,
+      name,
+      countries!countries_id_fkey (
+        id,
+        name
+      )
+    `);
+
+  if (error) {
+    return <pre>{JSON.stringify(error, null, 2)}</pre>;
+  }
 
   return (
     <main>
-      <div className={`w-full`}>
-        {save?.length}
-        {save?.map(({ username, id, like_post }) => (
-          <div key={id} className={`mb-5 text-yellow-500`}>
-            {id === 3 ? `` : ``}
-            <p className={`bg-stone-100 p-3 mb-1 rounded-lg`}>
-              {id} === {username} === {like_post}
-            </p>
-          </div>
-        ))}
-        <Insert />
-      </div>
+      <pre>{JSON.stringify(save, null, 2)}</pre>
     </main>
   );
 }

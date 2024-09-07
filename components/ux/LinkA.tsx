@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-export default function LinkA({ params, id_user, id }: any) {
+export default function LinkA({ params, id }: any) {
   // Check if params is a string before using replace method
   const formattedText = typeof params === 'string' 
     ? params
@@ -13,7 +13,7 @@ export default function LinkA({ params, id_user, id }: any) {
 
   return (
     <Link
-      href={`/${id_user}/${id}`}
+      href={`/n/${id}`}
       className={`line-clamp-3 text-sm font-light text-right`}
       dir="auto"
     >
