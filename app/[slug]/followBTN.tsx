@@ -68,7 +68,7 @@ export default function FollowBTN({ username }: any) {
   }
 
   if (!user) {
-    return <div>Please log in to follow this user.</div>; // عرض رسالة إذا لم يكن هناك مستخدم
+    return <div className="p-2 bg-stone-800 w-full text-center rounded-xl">Please log in to follow this user.</div>; // عرض رسالة إذا لم يكن هناك مستخدم
   }
 
   return (
