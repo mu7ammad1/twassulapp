@@ -1,12 +1,9 @@
 "use client";
+import { createClient } from "@/utils/supabase/client";
 import { useEffect, useState } from "react";
-import { createClient } from "@supabase/supabase-js";
 
 // إنشاء عميل Supabase
-const supabase = createClient(
-  "https://pkvjhmdwcfyowvxsvhjs.supabase.co",
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBrdmpobWR3Y2Z5b3d2eHN2aGpzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTk5MDk4MDEsImV4cCI6MjAzNTQ4NTgwMX0.axldIPcTS5PfPPAzz1brxaxaCO1YvmUTpGTP3m4EXq4"
-);
+const supabase = createClient();
 
 function ImageDisplayView({ imageName }: any) {
   const [imageUrl, setImageUrl] = useState(""); // حالة لتخزين رابط الصورة المجلبة

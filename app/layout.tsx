@@ -1,7 +1,7 @@
 import "./globals.css";
 import Menu from "@/components/ux/menu";
 import { cn } from "@/lib/utils";
-import { Cairo as FontDisplay } from "next/font/google";
+import { Rubik as FontDisplay } from "next/font/google";
 
 const defaultUrl = process.env.VERCEL_URL
   ? `https://${process.env.VERCEL_URL}`

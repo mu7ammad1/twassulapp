@@ -5,26 +5,25 @@ import { redirect } from "next/navigation";
 export default async function SaveBTN({ username, link }: any) {
   const supabase = createClient();
 
-
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
-
-  if (!user) {
-    return redirect("/login");
-  }
-
-  
   const Insert = async (formData: FormData) => {
     "use server";
 
     const supabase = createClient();
+
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
+
+    if (!user) {
+      return redirect("/login");
+    }
 
     const { data, error } = await supabase
       .from("love")
       .insert([{ username: username, link: link }])
       .select();
   };
+
   const { data: love } = await supabase.from("love").select().eq(`link`, link);
 
   const { data: IsUsername } = await supabase
