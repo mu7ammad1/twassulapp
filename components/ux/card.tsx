@@ -33,14 +33,14 @@ export default function Card({
     <div className={cn(`w-full bg-stone-900 rounded-lg p-2 my-1`)}>
       <div className={"w-full border-none shadow-none flex justify-between"}>
         <div className={`flex items-center`}>
-          <div className={`p-0 m-0 flex`}>
+          <div className={`flex`}>
             <Avatar_card_profile imageName={avatar} />
             {Valid === true ? (
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
                 fill="currentColor"
-                className="size-5 -translate-x-3 translate-y-4 rounded-full"
+                className="size-5 -translate-x-3 translate-y-4 rounded-full bg-stone-900 z-10"
               >
                 <path
                   fillRule="evenodd"

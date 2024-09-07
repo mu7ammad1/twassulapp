@@ -3,7 +3,7 @@ import Link from "next/link";
 import { Button } from "../ui/button";
 import { usePathname } from "next/navigation";
 
-export default async function Menu() {
+export default function Menu() {
   const pathname = usePathname();
 
   return (
@@ -11,13 +11,13 @@ export default async function Menu() {
       className={`px-5 max-sm:w-full max-lg:px-0 max-lg:w-3/4 flex flex-col max-lg:flex-row  w-full sticky top-3 max-lg:justify-center max-lg:flex max-lg:items-center`}
     >
       <div
-        className={`max-lg:*:w-full max-lg:w-full max-lg:mr-5 flex flex-col max-lg:flex-row max-lg:justify-center max-lg:items-center max-lg:*:*:w-full max-lg:*:*:rounded-none *:*:max-lg:my-0`}
+        className={`max-lg:*:w-full max-lg:w-full max-lg:mr-5 flex flex-col max-lg:flex-row max-lg:justify-center max-lg:items-center max-lg:*:*:w-full max-lg:*:*:rounded-md *:*:max-lg:my-0`}
       >
         <Link href={`/`}>
           <Button
             variant="outline"
             size={"default"}
-            className={`border-none rounded-full shadow-none text-lg my-1 py-6 hover:bg-white ${
+            className={`border-none rounded-full shadow-none text-lg my-1 py-7 hover:bg-white ${
               pathname === "/" ? "bg-white text-stone-800" : "bg-stone-800"
             }`}
           >
@@ -41,7 +41,7 @@ export default async function Menu() {
           <Button
             variant="outline"
             size={"default"}
-            className={`border-none rounded-full shadow-none text-lg my-1 py-6 hover:bg-white ${
+            className={`border-none rounded-full shadow-none text-lg my-1 py-7 hover:bg-white ${
               pathname === "/search"
                 ? "bg-white text-stone-800"
                 : "bg-stone-800"
@@ -67,7 +67,7 @@ export default async function Menu() {
           <Button
             variant="outline"
             size={"default"}
-            className={`border-none rounded-full shadow-none text-lg my-1 py-6 hover:bg-white ${
+            className={`border-none rounded-full shadow-none text-lg my-1 py-7 hover:bg-white ${
               pathname === "/chat" ? "bg-white text-stone-800" : "bg-stone-800"
             }`}
           >
@@ -91,7 +91,7 @@ export default async function Menu() {
           <Button
             variant="outline"
             size={"default"}
-            className={`border-none rounded-full shadow-none text-lg my-1 py-6 hover:bg-white ${
+            className={`border-none rounded-full shadow-none text-lg my-1 py-7 hover:bg-white ${
               pathname === "/notifications"
                 ? "bg-white text-stone-800"
                 : "bg-stone-800"
@@ -113,35 +113,11 @@ export default async function Menu() {
             </svg>
           </Button>
         </Link>
-        <Link href={`/new`}>
-          <Button
-            variant="outline"
-            size={"default"}
-            className={`border-none rounded-full shadow-none text-lg my-1 py-6 hover:bg-white ${
-              pathname === `/new` ? "bg-white text-stone-800" : "bg-stone-800"
-            }`}
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth={1.5}
-              stroke="currentColor"
-              className="size-6"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
-              />
-            </svg>
-          </Button>
-        </Link>
         <Link href={`/profile`}>
           <Button
             variant="outline"
             size={"default"}
-            className={`border-none rounded-full shadow-none text-lg my-1 py-6 hover:bg-white ${
+            className={`border-none rounded-full shadow-none text-lg my-1 py-7 hover:bg-white ${
               pathname === `/profile`
                 ? "bg-white text-stone-800"
                 : "bg-stone-800"

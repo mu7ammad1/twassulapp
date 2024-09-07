@@ -25,7 +25,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
       <div className={`mb-5`}>
         <section className={cn(`w-full flex justify-between items-center`)}>
           <div
-            className={`w-full px-16 max-md:px-10 max-sm:p-2 flex justify-between items-center`}
+            className={`w-full px-20 max-md:px-10 max-sm:gap-5 flex justify-between items-center`}
           >
             <div className={`text-center`}>
               <p className={`text-xl font-normal`}>{profile?.posts?.length}</p>

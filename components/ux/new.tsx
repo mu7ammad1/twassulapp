@@ -1,7 +1,5 @@
 import { createClient, generateRandomNumber } from "@/utils/supabase/server";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Textarea } from "@/components/ui/textarea";
-import { Button } from "../ui/button";
 import Avatar_card_profile from "./avatar_card_profile";
 import { redirect } from "next/navigation";
 import Link from "next/link";
@@ -16,7 +14,7 @@ export default async function News(avatar: any) {
 
   if (userError) {
     console.error("Error fetching user:", userError);
-    return <div>Error fetching user information in New.js</div>;
+    return null;
   }
 
   if (user) {

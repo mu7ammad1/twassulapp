@@ -13,8 +13,7 @@ export default async function AuthButton() {
   } = await supabase.auth.getUser();
 
   if (userError) {
-    console.error("Error fetching user:", userError);
-    return <div>Error fetching user information in AuthButton</div>;
+    return <div>عذرا لا يوجد حساب مسجل حتي الان</div>;
   }
 
   if (user) {
