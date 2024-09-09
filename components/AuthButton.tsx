@@ -3,7 +3,11 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 import Avatar_card_profile from "./ux/avatar_card_profile";
 
-export default async function AuthButton() {
+export default async function AuthButton({
+  searchParams,
+}: {
+  searchParams: { message: string };
+}) {
   const supabase = createClient();
 
   const {
@@ -12,15 +16,13 @@ export default async function AuthButton() {
   } = await supabase.auth.getUser();
 
   if (userError) {
-    return <div>عذرا لا يوجد حساب مسجل حتي الان</div>;
+    return redirect(`/login`);
   }
 
   if (user) {
     // تحقق من وجود ملف شخصي
     const { data: profile, error: profileError } = await supabase
-      .from(
-        `profiles`
-      )
+      .from(`profiles`)
       .select("*")
       .eq("id", user.id)
       .single();
