@@ -3,6 +3,7 @@ import { headers } from "next/headers";
 import { createClient } from "@/utils/supabase/server";
 import { redirect } from "next/navigation";
 import { SubmitButton } from "./submit-button";
+import SignInComponent from "./sign";
 
 export default async function Login({
   searchParams,
@@ -16,7 +17,7 @@ export default async function Login({
   } = await supabase.auth.getUser();
 
   if (user) {
-    return redirect("/");
+    return redirect(`/`);
   }
 
   const signIn = async (formData: FormData) => {
@@ -72,20 +73,14 @@ export default async function Login({
   };
 
   return (
-    <div className="flex-1 flex flex-col w-full px-8 sm:max-w-md justify-center gap-2">
-      <form className="flex-1 flex flex-col w-full justify-center gap-2 text-white">
-        <label className="text-md" htmlFor="email">
-          Email
-        </label>
+    <div className="flex flex-col justify-center items-center w-full px-8 gap-2 lg:max-w-md">
+      {/* <form className="flex-1 flex flex-col w-full justify-center gap-2 text-white">
         <input
           className="rounded-md px-4 py-2 bg-inherit border mb-6"
           name="email"
           placeholder="you@example.com"
           required
         />
-        <label className="text-md" htmlFor="password">
-          Password
-        </label>
         <input
           className="rounded-md px-4 py-2 bg-inherit border mb-6"
           type="password"
@@ -93,9 +88,6 @@ export default async function Login({
           placeholder="••••••••"
           required
         />
-        <label className="text-md" htmlFor="username">
-          Username
-        </label>
         <input
           className="rounded-md px-4 py-2 bg-inherit border mb-6"
           name="username"
@@ -121,7 +113,10 @@ export default async function Login({
             {searchParams.message}
           </p>
         )}
-      </form>
+      </form> */}
+      <SignInComponent searchParams={{
+        message: searchParams.message
+      }} />
     </div>
   );
 }

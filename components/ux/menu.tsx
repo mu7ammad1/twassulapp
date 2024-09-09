@@ -11,7 +11,7 @@ export default function Menu() {
       className={`px-5 max-sm:w-full max-lg:px-0 max-lg:w-3/4 flex flex-col max-lg:flex-row  w-full sticky top-3 max-lg:justify-center max-lg:flex max-lg:items-center`}
     >
       <div
-        className={`max-lg:*:w-full max-lg:w-full max-lg:mr-5 flex flex-col max-lg:flex-row max-lg:justify-center max-lg:items-center max-lg:*:*:w-full max-lg:*:*:rounded-md *:*:max-lg:my-0`}
+        className={`max-lg:*:w-full max-lg:w-full max-lg:mr-5 flex flex-col max-lg:flex-row max-lg:justify-center max-lg:items-center max-lg:*:*:w-full max-lg:*:*:rounded-none *:*:max-lg:my-0`}
       >
         <Link href={`/`}>
           <Button

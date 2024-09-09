@@ -1,46 +1,99 @@
+"use client";
+import { useState, useEffect } from "react";
+import { createClient } from "@/utils/supabase/client";
 import { SubmitButton } from "@/app/login/submit-button";
-import { createClient } from "@/utils/supabase/server";
-import { redirect } from "next/navigation";
 
-export default async function SaveBTN({ username, link }: any) {
+export default function SaveBTN({ post_id }: any) {
+  const [isLiked, setIsLiked] = useState(false);
+  const [likeCount, setLikeCount] = useState(0);
+  const [loading, setLoading] = useState(true);
+  const [user, setUser] = useState<any>(null);
+
   const supabase = createClient();
 
-  const Insert = async (formData: FormData) => {
-    "use server";
+  useEffect(() => {
+    // تحقق مما إذا كان المستخدم مسجل الدخول وقم بجلب حالة الإعجاب
+    const fetchLikeStatus = async () => {
+      const {
+        data: { user },
+      } = await supabase.auth.getUser();
 
-    const supabase = createClient();
+      if (user) {
+        setUser(user); // تخزين المستخدم في الحالة
 
-    const {
-      data: { user },
-    } = await supabase.auth.getUser();
+        // التحقق مما إذا كان المستخدم قد أعجب بالفعل بالمنشور
+        const { data: likeData } = await supabase
+          .from("like")
+          .select("*")
+          .eq("post_id", post_id)
+          .eq("user_id", user.id)
+          .single();
 
-    if (!user) {
-      return redirect("/login");
+        if (likeData) {
+          setIsLiked(true);
+        }
+
+        // الحصول على عدد الإعجابات للمنشور
+        const { data: likes } = await supabase
+          .from("like")
+          .select("*")
+          .eq("post_id", post_id);
+
+        setLikeCount(likes?.length || 0);
+      }
+
+      setLoading(false);
+    };
+
+    fetchLikeStatus();
+  }, [post_id, supabase]);
+
+  const handleLikeToggle = async () => {
+    if (!user) return; // التأكد من وجود المستخدم قبل تنفيذ العملية
+
+    if (isLiked) {
+      // إلغاء الإعجاب
+      const { error } = await supabase
+        .from("like")
+        .delete()
+        .eq("post_id", post_id)
+        .eq("user_id", user.id);
+
+      if (!error) {
+        setIsLiked(false);
+        setLikeCount(likeCount - 1);
+      }
+    } else {
+      // إضافة إعجاب
+      const { error } = await supabase
+        .from("like")
+        .insert({ post_id: post_id, user_id: user.id });
+
+      if (!error) {
+        setIsLiked(true);
+        setLikeCount(likeCount + 1);
+      }
     }
-
-    const { data, error } = await supabase
-      .from("love")
-      .insert([{ username: username, link: link }])
-      .select();
   };
 
-  const { data: love } = await supabase.from("love").select().eq(`link`, link);
-
-  const { data: IsUsername } = await supabase
-    .from("love")
-    .select("*")
-    .eq(`username`, `username1`);
+  if (loading) {
+    return <div>.</div>; // عرض مؤقت حتى يتم تحميل البيانات
+  }
 
   return (
     <form className={`flex gap-2`}>
-      <SubmitButton formAction={Insert} pendingText={`loading..`}>
+      <SubmitButton
+        formAction={handleLikeToggle}
+        pendingText={`Processing...`}
+        className="flex items-center gap-1"
+      >
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          fill="none"
+          fill={isLiked ? "red" : "none"} // يتغير اللون إلى الأحمر عند الإعجاب
           viewBox="0 0 24 24"
           strokeWidth={1.5}
-          stroke="currentColor"
-          className="size-6 hover:fill-rose-500 hover:stroke-rose-500"
+          stroke={isLiked ? "red" : "currentColor"} // يتغير لون الخط إلى الأحمر عند الإعجاب
+          className="w-6 h-6 hover:fill-rose-500 hover:stroke-rose-500"
         >
           <path
             strokeLinecap="round"
@@ -50,10 +103,7 @@ export default async function SaveBTN({ username, link }: any) {
         </svg>
       </SubmitButton>
       <main>
-        <div className={`w-full`}>{love?.length}</div>
-        {IsUsername?.map(({ id, username }: any) => (
-          <div>{username === `username2` ? `1` : `0`}</div>
-        ))}
+        <div className={`w-full`}>{likeCount}</div>
       </main>
     </form>
   );

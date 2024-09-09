@@ -5,16 +5,14 @@ import {
   CarouselItem,
 } from "@/components/ui/carousel";
 import { formatDistanceToNow, parseISO } from "date-fns";
-import { Button } from "../ui/button";
 import { cn } from "@/lib/utils";
-import ImageDisplayView from "./imageDisplayView";
-import Avatar_card_profile from "./avatar_card_profile";
-import dynamic from "next/dynamic";
-import SaveBTN from "./SaveBTN";
 
-const LinkA = dynamic(() => import("./LinkA"), {
-  ssr: false,
-});
+import dynamic from "next/dynamic";
+import Avatar_card_profile from "@/components/ux/avatar_card_profile";
+import LinkA from "@/components/ux/LinkA";
+import { Button } from "@/components/ui/button";
+import ImageDisplayView from "@/components/ux/imageDisplayView";
+import SaveBTN from "@/components/ux/SaveBTN";
 
 export default function Card({
   id,
@@ -66,11 +64,6 @@ export default function Card({
           <span className={`text-xs text-stone-500`}>{timeAgo}</span>
         </div>
         <div className={`flex justify-center items-center gap-2`}>
-          <span
-            className={`text-xs bg-white p-1 px-3 font-medium rounded-xl text-stone-900`}
-          >
-            متابعة
-          </span>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -88,13 +81,7 @@ export default function Card({
         </div>
       </div>
       <div className={`py-2 pt-3`}>
-        <Link
-          href={`/${id}`}
-          className={`line-clamp-3	text-sm font-light text-right`}
-          dir="auto"
-        >
-          <LinkA params={contents} id={id} />
-        </Link>
+        <LinkA params={contents} id={id} />
         <div className={"flex flex-col justify-center my-2"}>
           <div>
             {pollOptions && pollOptions.length > 0 && (
