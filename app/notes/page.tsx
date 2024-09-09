@@ -1,4 +1,3 @@
-import Insert from "@/components/ux/_post/insert";
 import { createClient } from "@/utils/supabase/server";
 
 export default async function Page() {
