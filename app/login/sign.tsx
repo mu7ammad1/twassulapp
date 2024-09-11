@@ -64,23 +64,23 @@ export default async function SignInComponent({
   };
 
   return (
-    <form className="flex-1 flex flex-col w-full justify-center items-center gap-4 my-5 *:w-full">
+    <form className="flex-1 flex flex-col w-full justify-center items-center gap-4 my-5 *:w-full *:text-lg">
       <Input
-        className="rounded-xl px-4 py-5 bg-inherit border"
+        className="rounded-xl bg-inherit border py-7 px-4"
         name="full_name"
         placeholder="اسم بالكامل"
         required
         dir="rtl"
       />
       <Input
-        className="rounded-xl px-4 py-5 bg-inherit border"
+        className="rounded-xl bg-inherit border py-7 px-4"
         name="email"
         placeholder="you@example.com"
         required
         dir="rtl"
       />
       <Input
-        className="rounded-xl px-4 py-5 bg-inherit border"
+        className="rounded-xl bg-inherit border py-7 px-4"
         type="password"
         name="password"
         placeholder="••••••••"
@@ -88,7 +88,7 @@ export default async function SignInComponent({
         dir="rtl"
       />
       <Input
-        className="rounded-xl px-4 py-5 bg-inherit border"
+        className="rounded-xl bg-inherit border py-7 px-4"
         name="username"
         placeholder="username"
         required
@@ -96,7 +96,7 @@ export default async function SignInComponent({
       />
       <SubmitButton
         formAction={signUp}
-        className="border bg-white rounded-xl px-0 py-3 text-foreground hover:bg-white/95"
+        className="border bg-white rounded-xl text-foreground p-3 hover:bg-white/80"
         pendingText="Signing Up..."
       >
         Sign Up

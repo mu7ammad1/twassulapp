@@ -66,15 +66,13 @@ export default async function Page({ params }: { params: { slug: string } }) {
         </section>
         <section className={cn(`w-full my-2 text-right`)}>
           <h2 className={`text-sm font-normal my-3`}>{profile?.bio}</h2>
-          <div><b>{follow?.length}</b></div>
         </section>
         <section
           className={cn(
             `w-full my-0 text-right flex justify-center items-center gap-3`
           )}
         >
-          <Button className="bg-secondary rounded-xl px-4 py-2">Chat</Button>
-          <FollowBTN username={profile?.id} />
+          <FollowBTN username={profile?.id} initialLength={follow?.length} />
         </section>
         <section
           className={cn(
@@ -82,14 +80,22 @@ export default async function Page({ params }: { params: { slug: string } }) {
           )}
         >
           <Tabs defaultValue="manshorat" className="w-full">
-            <TabsList className={`w-full bg-stone-800 gap-5 text-white`}>
-              <TabsTrigger value="clips" className={`w-full`}>
+            <TabsList
+              className={`w-full bg-stone-500/0 border-spacing-4 border-b-2 border-stone-800 rounded-none gap-5 text-white`}
+            >
+              <TabsTrigger
+                value="clips"
+                className={`w-full bg-white/0 focus-visible:bg-stone-500`}
+              >
                 clap
               </TabsTrigger>
               <TabsTrigger value="reply" className={`w-full`}>
                 ردود
               </TabsTrigger>
-              <TabsTrigger value="manshorat" className={`w-full`}>
+              <TabsTrigger
+                value="manshorat"
+                className={`w-full visited:bg-black`}
+              >
                 منشورات
               </TabsTrigger>
             </TabsList>
@@ -99,6 +105,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
                   `w-full mt-2 text-left flex-col flex justify-center items-center gap-2`
                 )}
               >
+                {profile?.posts == 0 && `لا يوجد منشورات`}
                 {profile?.posts?.map(
                   ({
                     id,

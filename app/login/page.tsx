@@ -22,7 +22,7 @@ export default async function Login({
   }
 
   return (
-    <div className="flex flex-col justify-center items-center w-full px-8 gap-2 lg:max-w-md">
+    <div className="flex flex-col justify-center items-center w-full px-8 gap-2 lg:max-w-lg">
       <LoginComponent
         searchParams={{
           message: searchParams.message,

@@ -60,7 +60,7 @@ function InputSearch() {
           <div key={id} className={`mb-1 text-white`}>
             <div
               className={
-                "w-full border-none shadow-none rounded-lg my-1 bg-stone-700 p-2 flex justify-between"
+                "w-full border-none shadow-none rounded-lg my-1 bg-stone-900 p-2 flex justify-between"
               }
             >
               <div className={`flex items-center gap-2`}>
