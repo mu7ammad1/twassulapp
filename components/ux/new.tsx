@@ -5,55 +5,8 @@ import { redirect } from "next/navigation";
 import Link from "next/link";
 import { SubmitButton } from "@/app/login/submit-button";
 
-export default async function News(avatar: any) {
-  const supabase = createClient();
-  const {
-    data: { user },
-    error: userError,
-  } = await supabase.auth.getUser();
-
-  if (userError) {
-    console.error("Error fetching user:", userError);
-    return null;
-  }
-
+export default async function News(user: any, profile: any) {
   if (user) {
-    // تحقق من وجود ملف شخصي
-    const { data: profile, error: profileError } = await supabase
-      .from("profiles")
-      .select("*")
-      .eq("id", user.id)
-      .single();
-
-    if (profileError && profileError.code !== "PGRST116") {
-      console.error("Error fetching profile:", profileError);
-      return <div>Error fetching profile information</div>;
-    }
-
-    if (!profile) {
-      // إنشاء ملف شخصي إذا لم يكن موجوداً
-      const { error: insertError } = await supabase
-        .from("profiles")
-        .insert([{ id: user.id, username: `username_${Date.now()}` }])
-        .single();
-
-      if (insertError) {
-        console.error("Error creating profile:", insertError);
-        return <div>Error creating profile</div>;
-      }
-    }
-
-    const { data: updatedProfile, error: updatedProfileError } = await supabase
-      .from("profiles")
-      .select("*")
-      .eq("id", user.id)
-      .single();
-
-    if (updatedProfileError) {
-      console.error("Error fetching updated profile:", updatedProfileError);
-      return <div>Error fetching updated profile information</div>;
-    }
-
     const postArticle = async (formData: FormData) => {
       "use server";
 
@@ -63,40 +16,54 @@ export default async function News(avatar: any) {
       const supabase = createClient();
 
       let photo_urls: string[] = [];
+
       if (files.length > 0) {
         const uploadPromises = files.map(async (file) => {
           const randomNumber = generateRandomNumber();
+          const imagePath = `posts/${Date.now()}_${randomNumber}`;
+
           const { data, error } = await supabase.storage
-            .from("images")
-            .upload(`public/${Date.now()}_${randomNumber}`, file);
+            .from("image")
+            .upload(imagePath, file);
 
           if (error) {
             console.error("Error uploading photo:", error);
             throw error;
           }
-          return data.path;
+
+          // Construct the full URL using the public URL method
+          const { data: publicURL } = supabase.storage
+            .from("image")
+            .getPublicUrl(imagePath);
+
+          return publicURL.publicUrl;
         });
 
         photo_urls = await Promise.all(uploadPromises);
       }
 
-      const { error } = await supabase
-        .from("post")
-        .insert([{ user_id: updatedProfile.username, content, photo_urls }]);
+      // Insert post into the database with the photo URLs
+      const { error } = await supabase.from("posts").insert([
+        {
+          user_id: user.id,
+          content,
+          photo_urls, // This will now contain the full image URLs
+        },
+      ]);
 
       if (error) {
         console.error("Error creating post:", error);
         return <div>Error creating post</div>;
       }
 
-      return redirect("/news");
+      return redirect("/");
     };
 
     return (
       <div className={`bg-stone-900 rounded-lg p-2 w-full`}>
         <div className={`flex gap-2`}>
           <div className="flex items-start justify-center gap-4">
-            <Avatar_card_profile imageName={updatedProfile.avatar} />
+            <Avatar_card_profile imageName={profile?.avatar_url} />
           </div>
           <form
             className="flex-1 flex flex-col w-full justify-center gap-2"
@@ -106,7 +73,6 @@ export default async function News(avatar: any) {
               name="content"
               placeholder="Tell us a little bit about yourself"
               className="resize-none text-right flex justify-start border-none focus-visible:ring-0 bg-stone-500/0 placeholder:text-stone-500 focus-visible:shadow-red-50/0 ring-0 focus:ring-0"
-              required
               dir="auto"
             />
             <input

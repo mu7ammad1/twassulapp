@@ -103,7 +103,7 @@ export default function Card({
             <CarouselContent className={`basis-full max-h-80`}>
               {photos?.map((id: any) => (
                 <CarouselItem key={id} className={`basis-auto`}>
-                  <ImageDisplayView imageName={id.slice(7, 25)} />
+                  <ImageDisplayView imageName={id} />
                 </CarouselItem>
               ))}
             </CarouselContent>
