@@ -45,7 +45,7 @@ export default async function News(user: any, profile: any) {
       // Insert post into the database with the photo URLs
       const { error } = await supabase.from("posts").insert([
         {
-          user_id: user.id,
+          user_id: user?.id,
           content,
           photo_urls, // This will now contain the full image URLs
         },

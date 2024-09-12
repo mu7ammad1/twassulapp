@@ -99,7 +99,7 @@ export default async function SignInComponent({
         className="border bg-white rounded-xl text-foreground p-3 hover:bg-white/80"
         pendingText="Signing Up..."
       >
-        Sign Up
+        حساب جديد
       </SubmitButton>
       {searchParams?.message && (
         <p className="mt-4 p-4 text-white bg-foreground/10 text-foreground text-center">

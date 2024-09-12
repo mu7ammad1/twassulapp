@@ -1,5 +1,4 @@
 import { createClient } from "@/utils/supabase/server";
-import New from "@/components/ux/new";
 import Card from "@/components/ux/card";
 
 // Home component definition
@@ -18,7 +17,6 @@ export default async function Home() {
 
   return (
     <main className="flex flex-col justify-center max-w-7xl w-full">
-      <New />
       {posts?.map((post, id) => (
         <div key={id} className="w-full h-full">
           <Card

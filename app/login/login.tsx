@@ -40,14 +40,14 @@ export default async function LoginComponent({
   return (
     <form className="flex-1 flex flex-col w-full justify-center items-center gap-4 my-5 *:w-full">
       <Input
-        className="rounded-xl px-4 py-5 bg-inherit border"
+        className="rounded-xl bg-inherit border py-7 px-4"
         name="email"
         placeholder="you@example.com"
         required
         dir="rtl"
       />
       <Input
-        className="rounded-xl px-4 py-5 bg-inherit border"
+        className="rounded-xl bg-inherit border py-7 px-4"
         type="password"
         name="password"
         placeholder="••••••••"
@@ -56,10 +56,10 @@ export default async function LoginComponent({
       />
       <SubmitButton
         formAction={signIn}
-        className="border bg-white rounded-xl px-0 py-3 text-foreground hover:bg-white/95"
+        className="border bg-white rounded-xl text-foreground p-3 hover:bg-white/80"
         pendingText="Signing In..."
       >
-        Sign In
+        تسجيل دخول
       </SubmitButton>
       {searchParams?.message && (
         <p className="mt-4 p-4 text-white bg-foreground/10 text-foreground text-center">
