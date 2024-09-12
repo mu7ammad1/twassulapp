@@ -8,7 +8,7 @@ export default async function Page({ params }: { params: { post: string } }) {
 
   const { data: post, error: postError } = await supabase
     .from("posts")
-    .select("*, profiles(id,username, avatar_url,isValid),like (id)")
+    .select("*, profiles(id,username, avatar_url,isValid)")
     .eq("id", `${params.post}`)
     .single();
 
@@ -31,7 +31,6 @@ export default async function Page({ params }: { params: { post: string } }) {
             publish={post.published}
             avatar={post.profiles.avatar_url}
             Valid={post.profiles.isValid}
-            likes={post.like.length}
           />
         </div>
         <h1 className={`flex text-left`}>14 Comments</h1>

@@ -68,7 +68,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
         </section>
         <section
           className={cn(
-            `w-full my-0 text-right flex justify-center items-center gap-3`
+            `w-full my-3 text-right flex justify-center items-center gap-3`
           )}
         >
           <FollowBTN username={profile?.id} initialLength={follow?.length} />

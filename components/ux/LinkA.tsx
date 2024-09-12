@@ -1,6 +1,4 @@
-import Link from "next/link";
-
-export default function LinkA({ params, id }: any) {
+export default function LinkA({ params }: any) {
   // Check if params is a string before using replace method
   const formattedText =
     typeof params === "string"
@@ -8,20 +6,16 @@ export default function LinkA({ params, id }: any) {
           .replace(/(?:\r\n|\r|\n)/g, "<br />")
           .replace(
             /#([a-zA-Z0-9\u0600-\u06FF]+)/g,
-            '<a href="/hashtag/$1" class="text-blue-500">$1</a>'
+            '<a href=`/hashtag/$1` class="text-blue-500">$1</a>'
           )
-      : params; // If params is not a string, return it as is (or handle accordingly)
+      : ""; // Return empty string if params is not a string
+  const markup = { __html: formattedText };
 
   return (
     <div
-      className={`line-clamp-3 text-sm font-light text-right`}
+      dangerouslySetInnerHTML={markup} // Correctly set the __html property
+      className="line-clamp-3 text-sm font-light text-right"
       dir="auto"
-    >
-      <div
-        dangerouslySetInnerHTML={{ __html: formattedText }}
-        className={`line-clamp-3 text-sm font-light text-right`}
-        dir="auto"
-      ></div>
-    </div>
+    />
   );
 }

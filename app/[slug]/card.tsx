@@ -84,7 +84,7 @@ export default function Card({
         </div>
       </div>
       <div className={`py-2 pt-3`}>
-        <LinkA params={contents} id={id} />
+        <LinkA params={contents} />
         <div className={"flex flex-col justify-center my-2"}>
           <div>
             {pollOptions && pollOptions.length > 0 && (
