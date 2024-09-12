@@ -17,11 +17,14 @@ export default function Menu() {
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          fill="none"
           viewBox="0 0 24 24"
-          strokeWidth={1.5}
-          stroke={`${pathname === "/notifications" ? `white` : `gray`}`}
-          className="size-6"
+          fill={`${pathname === "/profile" ? `none` : `none`}`}
+          stroke={`${pathname === "/profile" ? `white` : `gray`}`}
+          strokeWidth={1.8}
+          x="0px"
+          y="0px"
+          width="32"
+          height="32"
         >
           <path
             strokeLinecap="round"

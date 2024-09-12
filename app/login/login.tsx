@@ -2,6 +2,7 @@ import { createClient } from "@/utils/supabase/server";
 import { redirect } from "next/navigation";
 import { SubmitButton } from "./submit-button";
 import { Input } from "@/components/ui/input";
+import Link from "next/link";
 
 export default async function LoginComponent({
   searchParams,
@@ -38,7 +39,7 @@ export default async function LoginComponent({
   };
 
   return (
-    <form className="flex-1 flex flex-col w-full justify-center items-center gap-4 my-5 *:w-full">
+    <form className="flex-1 flex flex-col w-full justify-center items-center gap-4 my-5 *:w-full *:text-lg">
       <Input
         className="rounded-xl bg-inherit border py-7 px-4"
         name="email"
@@ -66,6 +67,11 @@ export default async function LoginComponent({
           {searchParams.message}
         </p>
       )}
+      <p className="flex justify-end items-center mx-5">
+        <Link href={`/signup`} className="flex">
+          انشاء حساب جديد
+        </Link>
+      </p>
     </form>
   );
 }

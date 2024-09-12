@@ -8,7 +8,7 @@ const defaultUrl = process.env.VERCEL_URL
   : "http://localhost:3000";
 
 const fontDisplay = FontDisplay({
-  weight:["400"],
+  weight: ["400"],
   subsets: ["latin"],
 });
 
@@ -38,7 +38,9 @@ export default function RootLayout({
             <Menu />
           </section>
           <section className={`w-2/3 pl-1 flex justify-center max-lg:w-full`}>
-            <div className={`max-lg:w-3/4 w-full max-sm:w-full`}>{children}</div>
+            <div className={`max-lg:w-3/4 w-full max-sm:w-full`}>
+              {children}
+            </div>
           </section>
         </main>
       </body>

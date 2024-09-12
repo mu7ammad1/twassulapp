@@ -5,7 +5,26 @@ import { redirect } from "next/navigation";
 import Link from "next/link";
 import { SubmitButton } from "@/app/login/submit-button";
 
-export default async function News(user: any, profile: any) {
+export default async function News() {
+  const supabase = createClient();
+  const {
+    data: { user },
+    error: userError,
+  } = await supabase.auth.getUser();
+
+  if (userError) {
+    return <div>userError</div>;
+  }
+  const { data: profile, error: updatedProfileError } = await supabase
+    .from("profiles")
+    .select("*")
+    .eq("id", user?.id)
+    .single();
+
+  if (updatedProfileError) {
+    console.error("Error fetching updated profile:", updatedProfileError);
+    return <div>Error fetching updated profile information</div>;
+  }
   if (user) {
     const postArticle = async (formData: FormData) => {
       "use server";

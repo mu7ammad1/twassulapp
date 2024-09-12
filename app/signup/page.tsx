@@ -1,9 +1,6 @@
-import Link from "next/link";
-import { headers } from "next/headers";
 import { createClient } from "@/utils/supabase/server";
 import { redirect } from "next/navigation";
-import { SubmitButton } from "./submit-button";
-import LoginComponent from "./login";
+import SignInComponent from "./sign";
 
 export default async function Login({
   searchParams,
@@ -22,8 +19,8 @@ export default async function Login({
 
   return (
     <div className="flex flex-col justify-center items-center w-full px-8 gap-2 lg:max-w-lg">
-      <h1 className="text-xl my-3">تسجيل دخول</h1>
-      <LoginComponent
+      <h1 className="text-xl my-3">انشاء حساب</h1>
+      <SignInComponent
         searchParams={{
           message: searchParams.message,
         }}

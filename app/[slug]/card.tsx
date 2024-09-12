@@ -23,12 +23,15 @@ export default function Card({
   Valid,
   pollOptions,
   avatar,
+  likes,
 }: any) {
   // حساب الفارق الزمني باستخدام date-fns
   const timeAgo = formatDistanceToNow(parseISO(created), { addSuffix: true });
 
   return (
-    <div className={cn(`w-full bg-stone-900 rounded-lg p-2 my-1`)}>
+    <div
+      className={cn(`w-full bg-stone-950 border-b border-stone-800 p-2 py-5`)}
+    >
       <div className={"w-full border-none shadow-none flex justify-between"}>
         <div className={`flex items-center`}>
           <div className={`flex`}>
@@ -113,7 +116,7 @@ export default function Card({
       <div className={`py-0 flex justify-between items-center`}>
         <div className={`flex gap-3`}>
           <div className={`flex gap-2`}>
-            <SaveBTN post_id={id} />
+            <SaveBTN post_id={id} likes={likes} />
           </div>
           <svg
             xmlns="http://www.w3.org/2000/svg"

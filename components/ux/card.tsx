@@ -11,6 +11,7 @@ import ImageDisplayView from "./imageDisplayView";
 import Avatar_card_profile from "./avatar_card_profile";
 import dynamic from "next/dynamic";
 import SaveBTN from "./SaveBTN";
+import FollowBTN from "@/app/[slug]/followBTN";
 
 const LinkA = dynamic(() => import("./LinkA"), {
   ssr: false,
@@ -20,17 +21,21 @@ export default function Card({
   id,
   created,
   id_user,
+  username_user,
   contents,
   photos,
   Valid,
   pollOptions,
   avatar,
+  likes,
 }: any) {
   // حساب الفارق الزمني باستخدام date-fns
   const timeAgo = formatDistanceToNow(parseISO(created), { addSuffix: true });
 
   return (
-    <div className={cn(`w-full bg-stone-900 rounded-lg p-2 my-1`)}>
+    <div
+      className={cn(`w-full bg-stone-950 border-b border-stone-800 p-2 py-5`)}
+    >
       <div className={"w-full border-none shadow-none flex justify-between"}>
         <div className={`flex items-center`}>
           <div className={`flex`}>
@@ -58,19 +63,14 @@ export default function Card({
             )}
           </div>
           <Link
-            href={`/${id_user}`.toLowerCase()}
+            href={`/${username_user}`.toLowerCase()}
             className={`text-base lowercase -translate-x-2`}
           >
-            <p>@{id_user}</p>
+            <p>@{username_user}</p>
           </Link>
           <span className={`text-xs text-stone-500`}>{timeAgo}</span>
         </div>
         <div className={`flex justify-center items-center gap-2`}>
-          <span
-            className={`text-xs bg-white p-1 px-3 font-medium rounded-xl text-stone-900`}
-          >
-            متابعة
-          </span>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -88,13 +88,7 @@ export default function Card({
         </div>
       </div>
       <div className={`py-2 pt-3`}>
-        <Link
-          href={`/${id}`}
-          className={`line-clamp-3	text-sm font-light text-right`}
-          dir="auto"
-        >
-          <LinkA params={contents} id={id} />
-        </Link>
+        <LinkA params={contents} id={id} />
         <div className={"flex flex-col justify-center my-2"}>
           <div>
             {pollOptions && pollOptions.length > 0 && (
@@ -126,7 +120,7 @@ export default function Card({
       <div className={`py-0 flex justify-between items-center`}>
         <div className={`flex gap-3`}>
           <div className={`flex gap-2`}>
-            <SaveBTN post_id={id} />
+            <SaveBTN post_id={id} likes={likes} />
           </div>
           <svg
             xmlns="http://www.w3.org/2000/svg"

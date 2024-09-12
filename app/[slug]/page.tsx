@@ -5,14 +5,13 @@ import { createClient } from "@/utils/supabase/server";
 import AvatarProfile from "@/components/ux/avatarProfile";
 import FollowBTN from "./followBTN";
 import Card from "./card";
-import { Button } from "@/components/ui/button";
 
 export default async function Page({ params }: { params: { slug: string } }) {
   const supabase = createClient();
 
   const { data: profile, error } = await supabase
     .from("profiles")
-    .select(`*, posts (*), love (*)`)
+    .select(`*, posts (*)`)
     .eq("username", `${params.slug}`)
     .single();
 
@@ -81,7 +80,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
         >
           <Tabs defaultValue="manshorat" className="w-full">
             <TabsList
-              className={`w-full bg-stone-500/0 border-spacing-4 border-b-2 border-stone-800 rounded-none gap-5 text-white`}
+              className={`w-full bg-stone-500/0 border-spacing-4 border-b-2 border-stone-800 rounded-none gap-5 text-white pb-5`}
             >
               <TabsTrigger
                 value="clips"
@@ -120,7 +119,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
                     avatar_id,
                     username,
                   }: any) => (
-                    <div key={id} className="w-full h-full">
+                    <div key={id} className="w-full h-full first:border-none">
                       <Card
                         pollOptions={poll_options}
                         id={id}

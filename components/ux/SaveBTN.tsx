@@ -10,7 +10,6 @@ export default function SaveBTN({ post_id }: any) {
   const [user, setUser] = useState<any>(null);
 
   const supabase = createClient();
-
   useEffect(() => {
     // تحقق مما إذا كان المستخدم مسجل الدخول وقم بجلب حالة الإعجاب
     const fetchLikeStatus = async () => {
@@ -19,7 +18,7 @@ export default function SaveBTN({ post_id }: any) {
       } = await supabase.auth.getUser();
 
       if (user) {
-        setUser(user); // تخزين المستخدم في الحالة
+        setUser(user);
 
         // التحقق مما إذا كان المستخدم قد أعجب بالفعل بالمنشور
         const { data: likeData } = await supabase
@@ -29,15 +28,15 @@ export default function SaveBTN({ post_id }: any) {
           .eq("user_id", user.id)
           .single();
 
-        if (likeData) {
-          setIsLiked(true);
-        }
-
         // الحصول على عدد الإعجابات للمنشور
         const { data: likes } = await supabase
           .from("like")
           .select("*")
           .eq("post_id", post_id);
+
+        if (likeData) {
+          setIsLiked(true);
+        }
 
         setLikeCount(likes?.length || 0);
       }
@@ -77,7 +76,7 @@ export default function SaveBTN({ post_id }: any) {
   };
 
   if (loading) {
-    return <div>.</div>; // عرض مؤقت حتى يتم تحميل البيانات
+    return <p>.</p>;
   }
 
   return (
@@ -102,9 +101,7 @@ export default function SaveBTN({ post_id }: any) {
           />
         </svg>
       </SubmitButton>
-      <main>
-        <div className={`w-full`}>{likeCount}</div>
-      </main>
+      <p className={`w-full`}>{likeCount}</p>
     </form>
   );
 }

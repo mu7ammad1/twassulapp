@@ -3,6 +3,7 @@ import { createClient } from "@/utils/supabase/server";
 import { redirect } from "next/navigation";
 import { SubmitButton } from "./submit-button";
 import { Input } from "@/components/ui/input";
+import Link from "next/link";
 
 export default async function SignInComponent({
   searchParams,
@@ -106,6 +107,11 @@ export default async function SignInComponent({
           {searchParams.message}
         </p>
       )}
+      <p className="flex justify-end items-center mx-5">
+        <Link href={`/login`} className="flex">
+          لدي حساب بالفعل
+        </Link>
+      </p>
     </form>
   );
 }
