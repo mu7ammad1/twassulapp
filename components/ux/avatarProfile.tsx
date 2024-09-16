@@ -9,7 +9,7 @@ function AvatarProfile({ imageName, CN }: any) {
           `w-20 h-20 rounded-full object-cover object-center m-0 border-4 border-white/0 `
         )}
       >
-        <AvatarImage src={imageName} />
+        <AvatarImage className="object-cover" src={imageName} />
         <AvatarFallback className={`bg-stone-800`}>{CN}</AvatarFallback>
       </Avatar>
      

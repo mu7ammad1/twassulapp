@@ -67,7 +67,11 @@ export default function FollowBTN({ username, initialLength }: any) {
   };
 
   if (loading) {
-    return <div>Loading...</div>; // عرض مؤقت حتى يتم تحميل الحالة
+    return (
+      <div className="w-full h-10 bg-stone-900 rounded-xl flex justify-center items-center">
+        ...جاري التحميل
+      </div>
+    );
   }
 
   if (!user) {
@@ -97,6 +101,7 @@ export default function FollowBTN({ username, initialLength }: any) {
             isFollowing ? `bg-secondary-foreground` : `bg-white text-black`
           }`}
           pendingText="Processing..."
+          size={`lg`}
         >
           {isFollowing ? "اللغاء المتابعة" : "متابعة"}
         </SubmitButton>

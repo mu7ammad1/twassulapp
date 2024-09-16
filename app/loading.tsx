@@ -5,7 +5,9 @@ export default function Loading() {
   // You can add any UI inside Loading, including a Skeleton.
   return (
     <Suspense fallback={<p>Loading feed...</p>}>
-      <LoadingSkeleton  />
+      <div className={`mt-10`}>
+        <LoadingSkeleton size={`5em`} />
+      </div>
     </Suspense>
   );
 }

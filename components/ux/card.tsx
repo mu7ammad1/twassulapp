@@ -11,7 +11,6 @@ import ImageDisplayView from "./imageDisplayView";
 import Avatar_card_profile from "./avatar_card_profile";
 import dynamic from "next/dynamic";
 import SaveBTN from "./SaveBTN";
-import FollowBTN from "@/app/[slug]/followBTN";
 
 const LinkA = dynamic(() => import("./LinkA"), {
   ssr: false,
@@ -119,7 +118,7 @@ export default function Card({
       </div>
       <div className={`py-0 flex justify-between items-center`}>
         <div className={`flex gap-3`}>
-          <div className={`flex gap-2`}>
+          <div className={`flex gap-2 items-center justify-center`}>
             <SaveBTN post_id={id} likes={likes} />
           </div>
           <svg

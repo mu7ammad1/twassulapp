@@ -13,6 +13,7 @@ import LinkA from "@/components/ux/LinkA";
 import { Button } from "@/components/ui/button";
 import ImageDisplayView from "@/components/ux/imageDisplayView";
 import SaveBTN from "@/components/ux/SaveBTN";
+import Menucard from "./menucard";
 
 export default function Card({
   id,
@@ -25,7 +26,6 @@ export default function Card({
   avatar,
   likes,
 }: any) {
-  // حساب الفارق الزمني باستخدام date-fns
   const timeAgo = formatDistanceToNow(parseISO(created), { addSuffix: true });
 
   return (
@@ -67,20 +67,7 @@ export default function Card({
           <span className={`text-xs text-stone-500`}>{timeAgo}</span>
         </div>
         <div className={`flex justify-center items-center gap-2`}>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            strokeWidth={2}
-            stroke="currentColor"
-            className="size-5 p-0 m-0"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M12 6.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5ZM12 12.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5ZM12 18.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5Z"
-            />
-          </svg>
+        <Menucard />
         </div>
       </div>
       <div className={`py-2 pt-3`}>

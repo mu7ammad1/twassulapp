@@ -94,6 +94,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
               <TabsTrigger
                 value="manshorat"
                 className={`w-full visited:bg-black`}
+                aria-setsize={20}
               >
                 منشورات
               </TabsTrigger>
@@ -128,7 +129,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
                         contents={content}
                         photos={photo_urls}
                         publish={published}
-                        avatar={profile?.avatar_url} // Adding avatar to the Card component
+                        avatar={profile?.avatar_url}
                       />
                     </div>
                   )

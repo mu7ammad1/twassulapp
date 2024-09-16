@@ -7,7 +7,8 @@ export default async function ForYou() {
   // Fetch post data
   const { data: posts, error: postError } = await supabase
     .from("posts")
-    .select("*, profiles(id,username, avatar_url,isValid)").match(8)
+    .select("*, profiles(id,username, avatar_url,isValid),like (*)")
+    .match(8);
 
   if (postError) {
     console.error(postError);
@@ -16,6 +17,7 @@ export default async function ForYou() {
 
   return (
     <main className="flex flex-col justify-center max-w-7xl w-full">
+      {/* <pre>{JSON.stringify(posts, null, 2)}</pre> */}
       {posts?.map((post, id) => (
         <div key={id} className="w-full h-full first:border-none">
           <Card
@@ -29,6 +31,7 @@ export default async function ForYou() {
             publish={post.published}
             avatar={post.profiles?.avatar_url}
             Valid={post.profiles.isValid}
+            likes={post.like.length}
           />
         </div>
       ))}

@@ -3,7 +3,7 @@
 import { useFormStatus } from "react-dom";
 import { type ComponentProps } from "react";
 
-type Props = ComponentProps<"button"> & {
+type Props = ComponentProps<any> & {
   pendingText?: string;
 };
 
