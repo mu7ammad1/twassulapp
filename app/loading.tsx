@@ -6,7 +6,7 @@ export default function Loading() {
   return (
     <Suspense fallback={<p>Loading feed...</p>}>
       <div className={`mt-10`}>
-        <LoadingSkeleton size={`5em`} />
+        <LoadingSkeleton size={`3em`} />
       </div>
     </Suspense>
   );

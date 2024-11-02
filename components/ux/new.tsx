@@ -4,6 +4,8 @@ import Avatar_card_profile from "./avatar_card_profile";
 import { redirect } from "next/navigation";
 import Link from "next/link";
 import { SubmitButton } from "@/app/login/submit-button";
+import View_images from "./view_images";
+import ImagePreview from "@/app/new/ViewImage";
 
 export default async function News() {
   const supabase = createClient();
@@ -94,13 +96,15 @@ export default async function News() {
               className="resize-none text-right flex justify-start border-none focus-visible:ring-0 bg-stone-500/0 placeholder:text-stone-500 focus-visible:shadow-red-50/0 ring-0 focus:ring-0"
               dir="auto"
             />
-            <input
+            {/* <input
               type="file"
               name="photos"
+              id="photos"
               multiple
               accept="image/*"
               className="file-input"
-            />
+            /> */}
+            <ImagePreview />
             <div className={`flex justify-between items-center gap-3`}>
               <div className={`flex gap-3`}>
                 <svg

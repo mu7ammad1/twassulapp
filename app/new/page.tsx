@@ -1,7 +1,7 @@
 import dynamic from "next/dynamic";
 
 const New = dynamic(() => import("@/components/ux/new"), {
-  ssr: false,
+  ssr: true,
 });
 
 export default async function NewPage() {
