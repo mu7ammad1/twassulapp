@@ -7,11 +7,11 @@ export default async function ForYou() {
   // Fetch post data
   const { data: posts, error: postError } = await supabase
     .from("views_posts")
-    .select("*, profiles(id,username, avatar_url,isValid),like (*)")
+    .select("*, profiles(id,username, avatar_url,isValid,full_name,bio),like (*)")
 
   if (postError) {
     console.error(postError);
-    return <div>Error fetching posts</div>;
+    return <div>هناك خطأ في استرداد البيانات</div>;
   }
 
   return (
@@ -30,6 +30,8 @@ export default async function ForYou() {
             avatar={post.profiles?.avatar_url}
             Valid={post.profiles.isValid}
             likes={post.like.length}
+            full_name={post.profiles.full_name}
+            bio={post.profiles.bio}
           />
         </div>
       ))}

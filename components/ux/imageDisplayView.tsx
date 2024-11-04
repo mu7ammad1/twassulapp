@@ -3,7 +3,7 @@ function ImageDisplayView({ imageName }: any) {
     <img
       src={imageName}
       alt={imageName}
-      className={`max-h-96 max-md:max-w-64 max-w-96 w-auto h-auto rounded-xl object-fill p-0 m-0 border border-stone-500 border-spacing-4`}
+      className={`max-h-80 max-w-[484px] max-md:max-w-80 w-full h-full rounded-xl object-contain p-0 m-0 border border-stone-500 border-spacing-4`}
     />
   );
 }

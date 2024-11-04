@@ -96,15 +96,8 @@ export default async function News() {
               className="resize-none text-right flex justify-start border-none focus-visible:ring-0 bg-stone-500/0 placeholder:text-stone-500 focus-visible:shadow-red-50/0 ring-0 focus:ring-0"
               dir="auto"
             />
-            {/* <input
-              type="file"
-              name="photos"
-              id="photos"
-              multiple
-              accept="image/*"
-              className="file-input"
-            /> */}
-            <ImagePreview />
+
+            {/* <ImagePreview /> */}
             <div className={`flex justify-between items-center gap-3`}>
               <div className={`flex gap-3`}>
                 <svg

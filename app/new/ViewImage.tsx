@@ -5,13 +5,17 @@ interface ImagePreviewProps {
   initialPreviews?: any[];
 }
 
-const ImagePreview: React.FC<ImagePreviewProps> = ({ initialPreviews = [] }) => {
+const ImagePreview: React.FC<ImagePreviewProps> = ({
+  initialPreviews = [],
+}) => {
   const [imagePreviews, setImagePreviews] = useState<any[]>(initialPreviews);
 
   const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const files = event.target.files;
+    const files = event.target.files || 0;
     if (files) {
-      const previews = Array.from(files).map((file) => URL.createObjectURL(file));
+      const previews = Array.from(files).map((file) =>
+        URL.createObjectURL(file)
+      );
       setImagePreviews((prevPreviews) => [...prevPreviews, ...previews]);
     }
   };
@@ -21,7 +25,9 @@ const ImagePreview: React.FC<ImagePreviewProps> = ({ initialPreviews = [] }) => 
   };
 
   const handleImageRemove = (index: number) => {
-    setImagePreviews((prevPreviews) => prevPreviews.filter((_, i) => i !== index));
+    setImagePreviews((prevPreviews) =>
+      prevPreviews.filter((_, i) => i !== index)
+    );
   };
 
   return (
@@ -34,10 +40,8 @@ const ImagePreview: React.FC<ImagePreviewProps> = ({ initialPreviews = [] }) => 
         multiple
         accept="image/*"
         className="hidden"
-        onChange={handleImageChange}
+        onChange={handleImageChange || 0}
       />
-
-      {/* Clickable text for uploading images */}
       <p
         className="cursor-pointer text-blue-600 underline"
         onClick={triggerFileInput}
@@ -54,13 +58,6 @@ const ImagePreview: React.FC<ImagePreviewProps> = ({ initialPreviews = [] }) => 
             className="w-24 h-24 object-cover rounded-md"
           />
           {/* Delete button */}
-          <button
-            onClick={() => handleImageRemove(index)}
-            className="absolute top-0 right-0 bg-red-600 text-white rounded-full p-1"
-            title="Remove image"
-          >
-            &times; {/* This can be replaced with an icon */}
-          </button>
         </div>
       ))}
     </div>
