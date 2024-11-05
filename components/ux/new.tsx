@@ -97,7 +97,7 @@ export default async function News() {
               dir="auto"
             />
 
-            {/* <ImagePreview /> */}
+            <ImagePreview />
             <div className={`flex justify-between items-center gap-3`}>
               <div className={`flex gap-3`}>
                 <svg

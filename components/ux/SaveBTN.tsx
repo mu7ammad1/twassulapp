@@ -6,7 +6,6 @@ import LoadingSkeleton from "./_comment/LoadingSkeleton";
 
 export default function SaveBTN({ post_id, likes }: any) {
   const [isLiked, setIsLiked] = useState(false);
-  const [likeCount, setLikeCount] = useState(likes);
   const [loading, setLoading] = useState(true);
   const [user, setUser] = useState<any>(null);
 
@@ -32,7 +31,6 @@ export default function SaveBTN({ post_id, likes }: any) {
         if (likeData) {
           setIsLiked(true);
         }
-        setLikeCount(likes || 0);
       }
 
       setLoading(false);
@@ -54,7 +52,6 @@ export default function SaveBTN({ post_id, likes }: any) {
 
       if (!error) {
         setIsLiked(false);
-        setLikeCount(likes - 1);
       }
     } else {
       // إضافة إعجاب
@@ -64,7 +61,6 @@ export default function SaveBTN({ post_id, likes }: any) {
 
       if (!error) {
         setIsLiked(true);
-        setLikeCount(likes + 1);
       }
     }
   };
@@ -109,7 +105,6 @@ export default function SaveBTN({ post_id, likes }: any) {
             d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z"
           />
         </svg>
-        {likeCount}
       </SubmitButton>
     </form>
   );

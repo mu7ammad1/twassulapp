@@ -8,7 +8,6 @@ import { formatDistanceToNow, parseISO } from "date-fns";
 import { Button } from "../ui/button";
 import { cn } from "@/lib/utils";
 import ImageDisplayView from "./imageDisplayView";
-import Avatar_card_profile from "./avatar_card_profile";
 import dynamic from "next/dynamic";
 import { Dialog, DialogTrigger, DialogContent } from "@/components/ui/dialog"; // استدعاء Dialog
 import {
@@ -41,98 +40,93 @@ export default function Card({
   full_name,
   bio,
 }: any) {
-  // حساب الفارق الزمني باستخدام date-fns
   const timeAgo = formatDistanceToNow(parseISO(created), { addSuffix: true });
 
   return (
-    <div
-      className={cn(`w-full bg-stone-950 border-b border-stone-800 p-2 py-5`)}
-    >
-      <div className={"w-full border-none shadow-none"}>
-        <div className={`flex items-start`}>
-          <HoverCard>
-            <HoverCardTrigger asChild>
-              <div className={`flex`}>
-                <Avatar>
-                  <AvatarImage src={avatar} />
-                  <AvatarFallback>VC</AvatarFallback>
-                </Avatar>
-                {Valid === true ? (
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 24 24"
-                    fill="currentColor"
-                    className="size-5 -translate-x-3 translate-y-4 rounded-full bg-stone-900 z-10"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      d="M8.603 3.799A4.49 4.49 0 0 1 12 2.25c1.357 0 2.573.6 3.397 1.549a4.49 4.49 0 0 1 3.498 1.307 4.491 4.491 0 0 1 1.307 3.497A4.49 4.49 0 0 1 21.75 12a4.49 4.49 0 0 1-1.549 3.397 4.491 4.491 0 0 1-1.307 3.497 4.491 4.491 0 0 1-3.497 1.307A4.49 4.49 0 0 1 12 21.75a4.49 4.49 0 0 1-3.397-1.549 4.49 4.49 0 0 1-3.498-1.306 4.491 4.491 0 0 1-1.307-3.498A4.49 4.49 0 0 1 2.25 12c0-1.357.6-2.573 1.549-3.397a4.49 4.49 0 0 1 1.307-3.497 4.49 4.49 0 0 1 3.497-1.307Zm7.007 6.387a.75.75 0 1 0-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 0 0-1.06 1.06l2.25 2.25a.75.75 0 0 0 1.14-.094l3.75-5.25Z"
-                      clipRule="evenodd"
-                    />
-                  </svg>
-                ) : (
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 24 24"
-                    fill="currentColor"
-                    className="size-5 -translate-x-3 translate-y-4 rounded-full fill-white/0"
-                  ></svg>
-                )}
-              </div>
-            </HoverCardTrigger>
+    <div className={cn(`w-full p-2 flex`)}>
+      <HoverCard>
+        <HoverCardTrigger asChild>
+          <div className={`flex`}>
+            <Avatar className="size-9 p-0">
+              <AvatarImage src={avatar} />
+              <AvatarFallback>VC</AvatarFallback>
+            </Avatar>
+            {Valid === true ? (
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+                className="size-5 -translate-x-3 translate-y-4 rounded-full bg-stone-900 z-10"
+              >
+                <path
+                  fillRule="evenodd"
+                  d="M8.603 3.799A4.49 4.49 0 0 1 12 2.25c1.357 0 2.573.6 3.397 1.549a4.49 4.49 0 0 1 3.498 1.307 4.491 4.491 0 0 1 1.307 3.497A4.49 4.49 0 0 1 21.75 12a4.49 4.49 0 0 1-1.549 3.397 4.491 4.491 0 0 1-1.307 3.497 4.491 4.491 0 0 1-3.497 1.307A4.49 4.49 0 0 1 12 21.75a4.49 4.49 0 0 1-3.397-1.549 4.49 4.49 0 0 1-3.498-1.306 4.491 4.491 0 0 1-1.307-3.498A4.49 4.49 0 0 1 2.25 12c0-1.357.6-2.573 1.549-3.397a4.49 4.49 0 0 1 1.307-3.497 4.49 4.49 0 0 1 3.497-1.307Zm7.007 6.387a.75.75 0 1 0-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 0 0-1.06 1.06l2.25 2.25a.75.75 0 0 0 1.14-.094l3.75-5.25Z"
+                  clipRule="evenodd"
+                />
+              </svg>
+            ) : (
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+                className="size-5 -translate-x-3 translate-y-4 rounded-full fill-white/0"
+              ></svg>
+            )}
+          </div>
+        </HoverCardTrigger>
 
-            <HoverCardContent className="w-80 rounded-3xl bg-stone-900 border-stone-800 text-white">
-              <div className="flex justify-start space-x-4">
-                <Avatar>
-                  <AvatarImage src={avatar} />
-                  <AvatarFallback>VC</AvatarFallback>
-                </Avatar>
-                <div className="">
-                  <h4 className="text-sm font-semibold">{full_name}</h4>
-                  <p className="text-sm">{bio}</p>
-                  <div className="flex items-center pt-2">
-                    <CalendarIcon className="mr-2 h-4 w-4 opacity-70" />
-                    <span className="text-xs text-muted-foreground">
-                      Joined December 2021
-                    </span>
-                  </div>
-                </div>
+        <HoverCardContent className="w-80 rounded-3xl bg-stone-900 border-stone-800 text-white">
+          <div className="flex justify-start space-x-4">
+            <Avatar>
+              <AvatarImage src={avatar} />
+              <AvatarFallback>VC</AvatarFallback>
+            </Avatar>
+            <div className="">
+              <h4 className="text-sm font-semibold">{full_name}</h4>
+              <p className="text-sm">{bio}</p>
+              <div className="flex items-center pt-2">
+                <CalendarIcon className="mr-2 h-4 w-4 opacity-70" />
+                <span className="text-xs text-muted-foreground">
+                  Joined December 2021
+                </span>
               </div>
-            </HoverCardContent>
-          </HoverCard>
-          <Link
-            href={`/${username_user}`.toLowerCase()}
-            className={`text-base lowercase -translate-x-2`}
-          >
-            <p>@{username_user}</p>
-          </Link>
-          <span className={`text-xs text-stone-500`}>{timeAgo}</span>
-        </div>
-      </div>
-
-      <section className="">
-        <section className={`py-3 pt-3 `}>
-          <Contents params={contents} />
-          <div className={"flex flex-col justify-center my-2"}>
-            <div>
-              {pollOptions && pollOptions.length > 0 && (
-                <div>
-                  {pollOptions.map((option: any, index: number) => (
-                    <Button
-                      key={index}
-                      variant={"outline"}
-                      size={"default"}
-                      className={`bg-stone-500/0 focus-within:bg-emerald-500 focus-within:border-emerald-500 w-full my-1 rounded-full`}
-                    >
-                      {option}
-                    </Button>
-                  ))}
-                </div>
-              )}
             </div>
-
+          </div>
+        </HoverCardContent>
+      </HoverCard>
+      <section className="w-full">
+        <div className={"w-full border-none shadow-none"}>
+          <div className={`flex items-center`}>
+            <Link
+              href={`/${username_user}`.toLowerCase()}
+              className={`text-base lowercase -translate-x-2`}
+            >
+              <p>@{username_user}</p>
+            </Link>
+            <span className={`text-xs text-stone-500`}>{timeAgo}</span>
+          </div>
+        </div>
+        <section className={`pt-2`}>
+          <Contents params={contents} />
+          <div>
+            {pollOptions && pollOptions.length > 0 && (
+              <div>
+                {pollOptions.map((option: any, index: number) => (
+                  <Button
+                    key={index}
+                    variant={"outline"}
+                    size={"default"}
+                    className={`bg-stone-500/0 focus-within:bg-emerald-500 focus-within:border-emerald-500 w-full my-1 rounded-full`}
+                  >
+                    {option}
+                  </Button>
+                ))}
+              </div>
+            )}
+          </div>
+          <div className={"flex flex-col justify-center my-2"}>
             <Carousel className="basis-full ">
-              <CarouselContent className="w-full h-full pl-12">
+              <CarouselContent className="w-full h-full z-50">
                 {photos?.map((id: string) => (
                   <CarouselItem key={id} className="basis-auto">
                     <Dialog>
@@ -171,8 +165,15 @@ export default function Card({
                               <AvatarImage src={avatar} />
                               <AvatarFallback>VC</AvatarFallback>
                             </Avatar>
-                            <Button variant="destructive" size={"icon"} className="rounded-full">
-                              <LucideGitCommitVertical absoluteStrokeWidth size={32} />
+                            <Button
+                              variant="destructive"
+                              size={"icon"}
+                              className="rounded-full"
+                            >
+                              <LucideGitCommitVertical
+                                absoluteStrokeWidth
+                                size={32}
+                              />
                             </Button>
                           </div>
                         </div>
@@ -185,7 +186,7 @@ export default function Card({
           </div>
         </section>
 
-        <section className={`py-0 pl-12 flex justify-between items-center`}>
+        <section className={`flex justify-between items-center`}>
           <div className={`flex gap-3`}>
             <div className={`flex gap-2 items-center justify-center`}>
               <SaveBTN post_id={id} likes={likes} userID={id_user} />
