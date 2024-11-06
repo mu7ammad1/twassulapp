@@ -115,8 +115,8 @@ export default function Menu() {
               width="32"
               height="32"
               viewBox="0 0 24 24"
-              fill={`${pathname === "/new" ? `white` : `none`}`}
-              stroke={`${pathname === "/new" ? `white` : `gray`}`}
+              fill={`${pathname === "/new" ? `dark:fill-white` : `none`}`}
+              stroke={`${pathname === "/new" ? `dark:fill-white` : `gray`}`}
               strokeWidth={`2`}
             >
               <path
@@ -140,8 +140,8 @@ export default function Menu() {
               width="32"
               height="32"
               viewBox="0 0 24 24"
-              fill={`${pathname === "/notifications" ? `white` : `none`}`}
-              stroke={`${pathname === "/notifications" ? `white` : `gray`}`}
+              fill={pathname === "/notifications" ? `dark:fill-white` : `none`}
+              stroke={pathname === "/notifications" ? `dark:fill-white` : `gray`}
               strokeWidth={`2`}
             >
               <path

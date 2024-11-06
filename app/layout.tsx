@@ -26,17 +26,17 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <ThemeProvider
-        attribute="class"
-        defaultTheme="system"
-        enableSystem
-        disableTransitionOnChange
+      <body
+        className={cn(
+          fontDisplay.className,
+          "dark:bg-stone-950 bg-stone-100 dark:text-white flex justify-center w-full"
+        )}
       >
-        <body
-          className={cn(
-            fontDisplay.className,
-            "dark:bg-stone-950 bg-stone-100 *:text-white flex justify-center w-full"
-          )}
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
         >
           <main className="flex justify-center py-2 max-w-5xl max-lg:block w-full">
             <section
@@ -50,8 +50,8 @@ export default function RootLayout({
               </div>
             </section>
           </main>
-        </body>
-      </ThemeProvider>
+        </ThemeProvider>
+      </body>
     </html>
   );
 }
