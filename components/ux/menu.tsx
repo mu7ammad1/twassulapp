@@ -12,7 +12,7 @@ export default function Menu() {
       <Button
         variant="outline"
         size={"default"}
-        className={`border-none rounded-full shadow-none text-lg py-7 bg-white/0 hover:bg-yellow-50/0`}
+        className={`border-none rounded-2xl shadow-none text-lg py-7 bg-white/0`}
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -36,7 +36,7 @@ export default function Menu() {
   );
   return (
     <div
-      className={`md:p-2 md:py-10 fixed left-0 md:w-auto w-full md:h-full flex flex-col justify-between items-center max-md:bg-stone-950`}
+      className={`md:p-2 md:py-10 fixed left-0 bottom-0 md:w-auto w-full md:h-full flex flex-col justify-between items-center max-md:bg-black/20 max-md:backdrop-blur-md`}
     >
       <Link href={`/`} className="max-md:hidden">
         <svg
@@ -60,7 +60,7 @@ export default function Menu() {
           <Button
             variant="outline"
             size={"default"}
-            className={`border-none rounded-full shadow-none text-lg py-7 bg-white/0 hover:bg-yellow-50/0`}
+            className={`border-none rounded-2xl shadow-none text-lg py-7 bg-white/0`}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -81,7 +81,7 @@ export default function Menu() {
           <Button
             variant="outline"
             size={"default"}
-            className={`border-none rounded-full shadow-none text-lg py-7 bg-white/0 hover:bg-yellow-50/0`}
+            className={`border-none rounded-2xl shadow-none text-lg py-7 bg-white/0`}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -106,7 +106,7 @@ export default function Menu() {
           <Button
             variant="outline"
             size={"default"}
-            className={`border-none rounded-full shadow-none text-lg py-7 bg-white/0 hover:bg-yellow-50/0`}
+            className={`border-none rounded-2xl shadow-none text-lg py-7 bg-white/0`}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -131,7 +131,7 @@ export default function Menu() {
           <Button
             variant="outline"
             size={"default"}
-            className={`border-none rounded-full shadow-none text-lg py-7 bg-white/0 hover:bg-yellow-50/0`}
+            className={`border-none rounded-2xl shadow-none text-lg py-7 bg-white/0`}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"

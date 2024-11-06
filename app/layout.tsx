@@ -35,7 +35,7 @@ export default function RootLayout({
         <body
           className={cn(
             fontDisplay.className,
-            "dark:bg-stone-950 *:text-white flex justify-center w-full"
+            "dark:bg-stone-950 bg-stone-100 *:text-white flex justify-center w-full"
           )}
         >
           <main className="flex justify-center p-3 max-w-5xl max-lg:block w-full">
@@ -44,7 +44,7 @@ export default function RootLayout({
             >
               <Menu />
             </section>
-            <section className={`w-2/3 pl-1 flex justify-center max-lg:w-full`}>
+            <section className={`w-2/3 flex justify-center max-lg:w-full`}>
               <div className={`max-lg:w-3/4 w-full max-sm:w-full`}>
                 {children}
               </div>
