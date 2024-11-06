@@ -38,7 +38,7 @@ export default function RootLayout({
             "dark:bg-stone-950 bg-stone-100 *:text-white flex justify-center w-full"
           )}
         >
-          <main className="flex justify-center p-3 max-w-5xl max-lg:block w-full">
+          <main className="flex justify-center py-2 max-w-5xl max-lg:block w-full">
             <section
               className={`basis-1/7 max-lg:fixed max-lg:bottom-0 z-50 max-sm:w-full max-lg:w-full max-lg:justify-center max-lg:flex max-lg:items-center`}
             >
