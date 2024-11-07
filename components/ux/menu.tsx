@@ -130,7 +130,7 @@ export default function Menu() {
           <Button
             variant="outline"
             size={"default"}
-            className={`border-none rounded-2xl shadow-none text-lg py-7 bg-white/0`}
+            className={`border-none rounded-2xl shadow-none text-lg py-7 bg-white/0 dark:fill-white`}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -139,10 +139,12 @@ export default function Menu() {
               width="32"
               height="32"
               viewBox="0 0 24 24"
-              fill={pathname === "/notifications" ? `dark:fill-white` : `none`}
-              stroke={
+              fill={`${
+                pathname === "/notifications" ? `dark:fill-white` : `none`
+              }`}
+              stroke={`${
                 pathname === "/notifications" ? `dark:stroke-white` : `gray`
-              }
+              }`}
               strokeWidth={`2`}
             >
               <path
