@@ -4,7 +4,7 @@ import { createClient } from "@/utils/supabase/client";
 import { SubmitButton } from "@/app/login/submit-button";
 import LoadingSkeleton from "./_comment/LoadingSkeleton";
 
-export default function SaveBTN({ post_id, likes }: any) {
+export default function SaveBTN({ post_id }: any) {
   const [isLiked, setIsLiked] = useState(false);
   const [loading, setLoading] = useState(true);
   const [user, setUser] = useState<any>(null);

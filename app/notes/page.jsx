@@ -1,67 +1,74 @@
 "use client";
 
-import { useEffect, useState } from 'react';
 import { createClient } from "@/utils/supabase/client";
+import { useEffect, useState } from "react";
 
-const supabase = createClient();
-
-function RealtimeComponent() {
-  const [postsData, setPostsData] = useState([]);
+const Posts = () => {
+  const [posts, setPosts] = useState([]);
+  const supabase = createClient();
 
   useEffect(() => {
-    // جلب البيانات الأولية من جدول posts
-    const fetchInitialData = async () => {
+    // Fetch initial posts
+    const fetchPosts = async () => {
       const { data, error } = await supabase
-        .from("posts")
-        .select(`
-          id,
-          content
-        `);
-
-      if (error) {
-        console.error("Error fetching initial data:", error);
-      } else {
-        setPostsData(data);
-      }
+        .from("views_posts")
+        .select(
+          "*, profiles(id,username, avatar_url,isValid,full_name,bio),like (*)"
+        );
+      if (error) console.error("Error fetching posts:", error);
+      else setPosts(data);
     };
 
-    fetchInitialData();
+    fetchPosts();
 
-    // الاشتراك في التغييرات في جدول "posts"
-    const subscription = supabase
-      .from('posts')
-      .on('*', (payload) => {
-        console.log('Change received!', payload);
-
-        // تحديث البيانات المعروضة بناءً على نوع التغيير
-        if (payload.eventType === 'INSERT') {
-          setPostsData((prevData) => [...prevData, payload.new]);
-        } else if (payload.eventType === 'UPDATE') {
-          setPostsData((prevData) =>
-            prevData.map((post) =>
+    // Set up real-time subscription using the `channel` API
+    const channel = supabase
+      .channel("public:posts")
+      .on(
+        "postgres_changes",
+        { event: "INSERT", schema: "public", table: "posts" },
+        (payload) => {
+          setPosts((prevPosts) => [payload.new, ...prevPosts]);
+        }
+      )
+      .on(
+        "postgres_changes",
+        { event: "UPDATE", schema: "public", table: "posts" },
+        (payload) => {
+          setPosts((prevPosts) =>
+            prevPosts.map((post) =>
               post.id === payload.new.id ? payload.new : post
             )
           );
-        } else if (payload.eventType === 'DELETE') {
-          setPostsData((prevData) =>
-            prevData.filter((post) => post.id !== payload.old.id)
+        }
+      )
+      .on(
+        "postgres_changes",
+        { event: "DELETE", schema: "public", table: "posts" },
+        (payload) => {
+          setPosts((prevPosts) =>
+            prevPosts.filter((post) => post.id !== payload.old.id)
           );
         }
-      })
+      )
       .subscribe();
 
-    // تنظيف الاشتراك عند انتهاء المكون
+    // Cleanup on component unmount
     return () => {
-      supabase.removeSubscription(subscription);
+      supabase.removeChannel(channel);
     };
   }, []);
 
   return (
     <div>
-      <h2>Realtime Posts Data</h2>
-      <pre>{JSON.stringify(postsData, null, 2)}</pre>
+      <h1>Real-time Posts</h1>
+      <ul>
+        {posts.map((post) => (
+          <li key={post.id}>{post.id}</li>
+        ))}
+      </ul>
     </div>
   );
-}
+};
 
-export default RealtimeComponent;
+export default Posts;

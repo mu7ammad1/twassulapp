@@ -1,7 +1,6 @@
 "use client";
 import Link from "next/link";
 import { Button } from "../ui/button";
-
 import { usePathname } from "next/navigation";
 import { ModeToggle } from "../modeToggle";
 
@@ -70,7 +69,7 @@ export default function Menu() {
               height="32"
               viewBox="0 0 48 48"
               fill={`${pathname === "/" ? `dark:fill-white` : `none`}`}
-              stroke={`${pathname === "/" ? `dark:fill-white` : `gray`}`}
+              stroke={`${pathname === "/" ? `dark:stroke-white` : `gray`}`}
               strokeWidth={`3`}
             >
               <path d="M39.5,43h-9c-1.381,0-2.5-1.119-2.5-2.5v-9c0-1.105-0.895-2-2-2h-4c-1.105,0-2,0.895-2,2v9c0,1.381-1.119,2.5-2.5,2.5h-9	C7.119,43,6,41.881,6,40.5V21.413c0-2.299,1.054-4.471,2.859-5.893L23.071,4.321c0.545-0.428,1.313-0.428,1.857,0L39.142,15.52	C40.947,16.942,42,19.113,42,21.411V40.5C42,41.881,40.881,43,39.5,43z"></path>
@@ -91,7 +90,7 @@ export default function Menu() {
               width="32"
               height="32"
               fill={`none`}
-              stroke={`${pathname === "/search" ? `white` : `gray`}`}
+              stroke={pathname === "/search" ? `white` : `gray`}
               strokeWidth={`2`}
             >
               <path
@@ -115,8 +114,8 @@ export default function Menu() {
               width="32"
               height="32"
               viewBox="0 0 24 24"
-              fill={`${pathname === "/new" ? `dark:fill-white` : `none`}`}
-              stroke={`${pathname === "/new" ? `dark:fill-white` : `gray`}`}
+              fill={`none`}
+              stroke={pathname === "/new" ? `white` : `gray`}
               strokeWidth={`2`}
             >
               <path
@@ -141,7 +140,9 @@ export default function Menu() {
               height="32"
               viewBox="0 0 24 24"
               fill={pathname === "/notifications" ? `dark:fill-white` : `none`}
-              stroke={pathname === "/notifications" ? `dark:fill-white` : `gray`}
+              stroke={
+                pathname === "/notifications" ? `dark:stroke-white` : `gray`
+              }
               strokeWidth={`2`}
             >
               <path

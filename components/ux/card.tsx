@@ -39,7 +39,11 @@ export default function Card({
   const timeAgo = formatDistanceToNow(parseISO(created), { addSuffix: true });
 
   return (
-    <div className={cn(`w-full py-2`)}>
+    <div className={cn(`w-full py-2 relative z-0`)}>
+      <Link
+        href={`/${username_user}/${id}`}
+        className="-z-0 w-full h-full absolute top-0 bottom-0 left-0 right-0"
+      ></Link>
       <main className="w-full">
         <section className={"w-full border-none shadow-none"}>
           <div className={`flex items-center`}>
@@ -75,7 +79,7 @@ export default function Card({
                   </div>
                 </HoverCardTrigger>
 
-                <HoverCardContent className="w-80 rounded-3xl bg-stone-900 border-stone-800 text-white">
+                <HoverCardContent className="w-80 rounded-3xl bg-stone-900 border-stone-800">
                   <div className="flex justify-start space-x-4">
                     <Avatar>
                       <AvatarImage src={avatar} />
@@ -101,14 +105,14 @@ export default function Card({
             >
               <p>@{username_user}</p>
             </Link>
-            <span className={`text-xs text-stone-500`}>{timeAgo}</span>
+            <span className={`text-xs text-stone-500 z-0`}>{timeAgo}</span>
           </div>
         </section>
 
         <section className={`pt-2`}>
           <Link
             href={`/${username_user}/${id}`}
-            className="line-clamp-3 text-sm font-light text-right pl-10"
+            className="line-clamp-3 text-sm font-light text-right pl-10 z-50"
             dir="auto"
           >
             {contents}
@@ -134,7 +138,7 @@ export default function Card({
           </div>
         </section>
 
-        <section className={`flex justify-between items-center pl-10 py-1`}>
+        <section className={`flex justify-between items-center pl-10 py-1 *:z-10 z-10`}>
           <div className={`flex gap-3`}>
             <div className={`flex gap-2 items-center justify-center`}>
               <SaveBTN post_id={id} likes={likes} userID={id_user} />
@@ -185,7 +189,7 @@ export default function Card({
   function Carousel_Images() {
     return (
       <Carousel className="basis-full ">
-        <CarouselContent className="w-full h-full z-50 pl-10">
+        <CarouselContent className="w-full h-full pl-10">
           {photos?.map((id: string) => (
             <CarouselItem key={id} className="basis-auto">
               <Dialog>
@@ -228,7 +232,6 @@ export default function Card({
                         variant="destructive"
                         size={"icon"}
                         className="rounded-full"
-                        
                       >
                         <LucideGitCommitVertical
                           absoluteStrokeWidth

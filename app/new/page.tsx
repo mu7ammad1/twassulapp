@@ -1,4 +1,12 @@
 import dynamic from "next/dynamic";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 
 const New = dynamic(() => import("@/components/ux/new"), {
   ssr: false,
@@ -6,8 +14,16 @@ const New = dynamic(() => import("@/components/ux/new"), {
 
 export default async function NewPage() {
   return (
-    <main>
-      <New />
-    </main>
+    <Dialog>
+      <DialogTrigger>Open</DialogTrigger>
+      <DialogContent className="w-full border-none bg-stone-900">
+        <DialogHeader className={`p-0 m-0`}>
+          <DialogTitle className="flex justify-between items-center w-full">انشاء منشور جديد</DialogTitle>
+          <DialogDescription className="w-full">
+            <New />
+          </DialogDescription>
+        </DialogHeader>
+      </DialogContent>
+    </Dialog>
   );
 }
