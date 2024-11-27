@@ -1,8 +1,18 @@
 @tailwind base;
-  @tailwind components;
-  @tailwind utilities;
+@tailwind components;
+@tailwind utilities;
 
-  
+
+p{
+  @apply text-sm font-medium;
+  color: var(--foreground);
+  @apply leading-normal;
+  @apply whitespace-pre-wrap;
+  @apply break-words;
+  @apply font-sans;
+  direction: auto;
+}
+
 @layer base {
   :root {
     --background: 0 0% 100%;
@@ -60,12 +70,11 @@
   }
 }
 
-
-  @layer base {
-    * {
-      @apply border-border;
-    }
-    body {
-      @apply bg-background text-foreground;
-    }
+@layer base {
+  * {
+    @apply border-border;
   }
+  body {
+    @apply bg-background text-foreground;
+  }
+}

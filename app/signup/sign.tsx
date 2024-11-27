@@ -97,7 +97,7 @@ export default async function SignInComponent({
       />
       <SubmitButton
         formAction={signUp}
-        className="border bg-white rounded-xl text-foreground p-3 hover:bg-white/80"
+        className="border dark:bg-stone-900 bg-white rounded-xl text-foreground p-3 hover:bg-white/80"
         pendingText="Signing Up..."
       >
         حساب جديد

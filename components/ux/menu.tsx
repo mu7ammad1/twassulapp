@@ -2,7 +2,11 @@
 import Link from "next/link";
 import { Button } from "../ui/button";
 import { usePathname } from "next/navigation";
-import { ModeToggle } from "../modeToggle";
+
+import dynamic from "next/dynamic";
+const ModeToggle = dynamic(() => import("../modeToggle"), {
+  ssr: false,
+});
 
 export default function Menu() {
   const pathname = usePathname();
@@ -139,12 +143,10 @@ export default function Menu() {
               width="32"
               height="32"
               viewBox="0 0 24 24"
-              fill={`${
-                pathname === "/notifications" ? `dark:fill-white` : `none`
-              }`}
-              stroke={`${
-                pathname === "/notifications" ? `dark:stroke-white` : `gray`
-              }`}
+              fill={`${pathname === "/notifications" ? `dark:fill-white` : `none`
+                }`}
+              stroke={`${pathname === "/notifications" ? `dark:stroke-white` : `gray`
+                }`}
               strokeWidth={`2`}
             >
               <path
@@ -155,12 +157,32 @@ export default function Menu() {
             </svg>
           </Button>
         </Link>
-        <span className={`md:hidden`}>{profile}</span>
+        {profile}
       </div>
       <div
         className={`w-full flex flex-col gap-2 max-md:flex-row justify-center items-center max-md:hidden`}
       >
-        {profile}
+        <Link href={`/menu`}>
+          <Button
+            variant="outline"
+            size={"default"}
+            className={`border-none rounded-2xl shadow-none text-lg py-7 bg-white/0`}
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              x="0px"
+              y="0px"
+              width="32"
+              height="32"
+              fill={`none`}
+              stroke={pathname === "/menu" ? `white` : `gray`}
+              strokeWidth={`2`}
+            >
+              <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 9h16.5m-16.5 6.75h16.5" />
+            </svg>
+          </Button>
+        </Link>
         <ModeToggle />
       </div>
     </div>

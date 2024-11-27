@@ -33,7 +33,7 @@ const ImagePreview: React.FC<ImagePreviewProps> = ({
   return (
     <div className="flex flex-wrap gap-2">
       {/* Hidden file input */}
-      <input
+      {/* <input
         type="file"
         name="photos"
         id="photos"
@@ -41,7 +41,7 @@ const ImagePreview: React.FC<ImagePreviewProps> = ({
         accept="image/*"
         className="hidden"
         onChange={handleImageChange || 0}
-      />
+      /> */}
       <div className={`flex justify-between items-center gap-3`}>
         <svg
           onClick={triggerFileInput}

@@ -47,7 +47,7 @@ function InputSearch() {
         name="search"
         id="search"
         placeholder={"Search users"}
-        className="w-full p-4 rounded-lg bg-stone-900 placeholder:text-stone-300 mb-2 size-full text-lg"
+        className="w-full p-4 rounded-lg placeholder:text-stone-300 mb-2 size-full text-lg"
         value={value}
         onChange={(e) => setValue(e.target.value)}
       />
@@ -57,10 +57,10 @@ function InputSearch() {
         <p className="text-white">No results found</p> // Show message if no results
       ) : (
         profile?.map(({ id, username, isValid, avatar }) => (
-          <div key={id} className={`mb-1 text-white`}>
+          <div key={id} className={`mb-1`}>
             <div
               className={
-                "w-full border-none shadow-none rounded-lg my-1 bg-stone-900 p-2 flex justify-between"
+                "w-full border-none shadow-none rounded-lg my-1 p-2 flex justify-between"
               }
             >
               <div className={`flex items-center gap-2`}>
@@ -76,7 +76,7 @@ function InputSearch() {
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 24 24"
                     fill="currentColor"
-                    className="size-5 text-white"
+                    className="size-5"
                   >
                     <path
                       fillRule="evenodd"

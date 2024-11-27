@@ -14,18 +14,18 @@ export default async function Search() {
     .limit(20);
 
   return (
-    <div className={`w-full bg-stone-950 sticky top-3`}>
+    <div className={`w-full sticky top-3`}>
       <div className={`w-full mt-1`}>
         <InputSearch />
         {profile?.map(({ id, username, isValid, avatar_url }) => (
           <div key={id} className={`mb-1 text-white`}>
             <div
               className={
-                "w-full border-none shadow-none rounded-lg my-1 bg-stone-900 p-2 flex justify-between"
+                "w-full border-none shadow-none rounded-lg my-1 p-2 flex justify-between"
               }
             >
-              <div>
-                <div className={`flex items-center gap-2`}>
+              <div className="flex flex-col w-full">
+                <div className={`flex items-start gap-2`}>
                   <Avatar_card_profile imageName={avatar_url} />
                   <Link
                     href={`/${username}`.toLowerCase()}

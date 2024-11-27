@@ -29,14 +29,14 @@ export default async function Page({ params }: { params: { slug: string } }) {
   }
 
   return (
-    <main>
+    <main className="p-2">
       <div className={`mb-5`}>
-        <section className={cn(`w-full flex justify-between items-center`)}>
+        <section className={cn(`w-full flex justify-between items-start`)}>
           <div
             className={cn(`w-full mt-2 text-left flex justify-start flex-col`)}
           >
             <h2
-              className={`text-3xl font-medium flex justify-start items-center gap-2`}
+              className={`text-3xl font-medium flex justify-start items-start gap-2`}
             >
               {profile?.full_name}
               {profile?.isValid === true ? (

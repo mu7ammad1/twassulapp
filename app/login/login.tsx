@@ -57,7 +57,7 @@ export default async function LoginComponent({
       />
       <SubmitButton
         formAction={signIn}
-        className="border bg-white rounded-xl text-foreground p-3 hover:bg-white/80"
+        className="border dark:bg-stone-900 bg-white rounded-xl text-foreground p-3 hover:bg-white/80"
         pendingText="Signing In..."
       >
         تسجيل دخول

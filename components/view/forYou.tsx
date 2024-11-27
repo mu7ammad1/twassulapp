@@ -15,7 +15,7 @@ export default async function ForYou() {
   }
 
   return (
-    <main className="flex flex-col justify-center max-w-7xl w-full bg-stone-900 border rounded-2xl border-none px-3 py-2">
+    <main className="flex flex-col justify-center max-w-7xl w-full border rounded-2xl border-none px-3 py-2">
       {posts?.map((post, id) => (
         <div key={id} className="w-full h-full first:border-none gap-5">
           <Card

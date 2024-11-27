@@ -46,7 +46,7 @@ export default function Card({
       ></Link>
       <main className="w-full">
         <section className={"w-full border-none shadow-none"}>
-          <div className={`flex items-center`}>
+          <div className={`flex items-start`}>
             <div className={`flex `}>
               <HoverCard>
                 <HoverCardTrigger asChild>
@@ -79,7 +79,7 @@ export default function Card({
                   </div>
                 </HoverCardTrigger>
 
-                <HoverCardContent className="w-80 rounded-3xl bg-stone-900 border-stone-800">
+                <HoverCardContent className="w-80 rounded-3xl bg-stone-900 border-stone-800 p-0">
                   <div className="flex justify-start space-x-4">
                     <Avatar>
                       <AvatarImage src={avatar} />
@@ -139,33 +139,26 @@ export default function Card({
         </section>
 
         <section className={`flex justify-between items-center pl-10 py-1 *:z-10 z-10`}>
-          <div className={`flex gap-3`}>
-            <div className={`flex gap-2 items-center justify-center`}>
-              <SaveBTN post_id={id} likes={likes} userID={id_user} />
-            </div>
-            <Dialog>
-              <DialogTrigger asChild className="first:bg-stone-900">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth={1.5}
-                  stroke="currentColor"
-                  className="size-6"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M12 20.25c4.97 0 9-3.694 9-8.25s-4.03-8.25-9-8.25S3 7.444 3 12c0 2.104.859 4.023 2.273 5.48.432.447.74 1.04.586 1.641a4.483 4.483 0 0 1-.923 1.785A5.969 5.969 0 0 0 6 21c1.282 0 2.47-.402 3.445-1.087.81.22 1.668.337 2.555.337Z"
-                  />
-                </svg>
-              </DialogTrigger>
-              <DialogContent className="w-2/3 h-full max-w-full max-h-full bg-white/0 border-none *:bg-white *:border-blue-900 *:border *:*:p-5 *:rounded-xl">
-                <div className="w-full h-full p-5">pp</div>
-              </DialogContent>
-            </Dialog>
+          <div className={`flex gap-2 items-center justify-center`}>
+            <SaveBTN post_id={id} likes={likes} userID={id_user} />
+            <span className="p-2 hover:bg-stone-800 rounded-full">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={1.5}
+                stroke="currentColor"
+                className="size-6"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M12 20.25c4.97 0 9-3.694 9-8.25s-4.03-8.25-9-8.25S3 7.444 3 12c0 2.104.859 4.023 2.273 5.48.432.447.74 1.04.586 1.641a4.483 4.483 0 0 1-.923 1.785A5.969 5.969 0 0 0 6 21c1.282 0 2.47-.402 3.445-1.087.81.22 1.668.337 2.555.337Z"
+                />
+              </svg>
+            </span>
           </div>
-          <div>
+          <span className="p-2 hover:bg-stone-800 rounded-full">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -180,7 +173,7 @@ export default function Card({
                 d="M12 20.25c4.97 0 9-3.694 9-8.25s-4.03-8.25-9-8.25S3 7.444 3 12c0 2.104.859 4.023 2.273 5.48.432.447.74 1.04.586 1.641a4.483 4.483 0 0 1-.923 1.785A5.969 5.969 0 0 0 6 21c1.282 0 2.47-.402 3.445-1.087.81.22 1.668.337 2.555.337Z"
               />
             </svg>
-          </div>
+          </span>
         </section>
       </main>
     </div>
@@ -212,7 +205,7 @@ export default function Card({
                             src={photoId}
                             alt={`Image ${id}`}
                             loading="eager"
-                            className="h-full w-full max-w-full max-h-[80vh] object-contain rounded-3xl"
+                            className="h-full w-full max-w-full max-h-[80vh] object-contain object-center rounded-3xl"
                           />
                         </CarouselItem>
                       ))}
