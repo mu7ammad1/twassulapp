@@ -97,9 +97,8 @@ export default function FollowBTN({ username, initialLength }: any) {
       <form className="mt-3 flex flex-col w-full justify-center">
         <SubmitButton
           formAction={handleFollowToggle}
-          className={`rounded-xl px-4 py-2 ${
-            isFollowing ? `bg-secondary-foreground` : `bg-white text-black`
-          }`}
+          className={`rounded-xl px-4 py-2 ${isFollowing ? `bg-popover` : `dark:bg-secondary bg-yellow-600 dark:text-white`
+            }`}
           pendingText="Processing..."
           size={`lg`}
         >
@@ -109,3 +108,8 @@ export default function FollowBTN({ username, initialLength }: any) {
     </div>
   );
 }
+
+
+
+
+

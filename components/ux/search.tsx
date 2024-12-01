@@ -14,7 +14,7 @@ export default async function Search() {
     .limit(20);
 
   return (
-    <div className={`w-full sticky top-3`}>
+    <div className={`w-full sticky top-3 px-3`}>
       <div className={`w-full mt-1`}>
         <InputSearch />
         {profile?.map(({ id, username, isValid, avatar_url }) => (

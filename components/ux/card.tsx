@@ -15,12 +15,10 @@ import {
   HoverCardContent,
   HoverCardTrigger,
 } from "@/components/ui/hover-card";
-import { CalendarIcon, LucideGitCommitVertical } from "lucide-react";
+import { CalendarIcon, LucideGitCommitVertical, ParkingCircle } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import SaveBTN from "./SaveBTN";
 
-const SaveBTN = dynamic(() => import("./SaveBTN"), {
-  ssr: false,
-});
 
 export default function Card({
   id,
@@ -30,11 +28,19 @@ export default function Card({
   contents,
   photos,
   Valid,
-  pollOptions,
   avatar,
   likes,
   full_name,
   bio,
+  is_following,
+  user_liked,
+  user,
+  followers_count,
+  option_one,
+  option_two,
+  option_three,
+  option_four,
+  user_vote
 }: any) {
   const timeAgo = formatDistanceToNow(parseISO(created), { addSuffix: true });
 
@@ -79,7 +85,7 @@ export default function Card({
                   </div>
                 </HoverCardTrigger>
 
-                <HoverCardContent className="w-80 rounded-3xl bg-stone-900 border-stone-800 p-0">
+                <HoverCardContent className="w-80 rounded-3xl bg-stone-900 border-stone-800 p-3">
                   <div className="flex justify-start space-x-4">
                     <Avatar>
                       <AvatarImage src={avatar} />
@@ -88,6 +94,12 @@ export default function Card({
                     <div className="">
                       <h4 className="text-sm font-semibold">{full_name}</h4>
                       <p className="text-sm">{bio}</p>
+                      <div className="flex items-center pt-2">
+                        <ParkingCircle className="mr-2 h-4 w-4 opacity-70" />
+                        <span className="text-xs text-muted-foreground">
+                          Followers{followers_count}
+                        </span>
+                      </div>
                       <div className="flex items-center pt-2">
                         <CalendarIcon className="mr-2 h-4 w-4 opacity-70" />
                         <span className="text-xs text-muted-foreground">
@@ -109,39 +121,64 @@ export default function Card({
           </div>
         </section>
 
-        <section className={`pt-2`}>
-          <Link
-            href={`/${username_user}/${id}`}
-            className="line-clamp-3 text-sm font-light text-right pl-10 z-50"
-            dir="auto"
-          >
-            {contents}
-          </Link>
-          <div>
-            {pollOptions && pollOptions.length > 0 && (
-              <div>
-                {pollOptions.map((option: any, index: number) => (
-                  <Button
-                    key={index}
-                    variant={"outline"}
-                    size={"default"}
-                    className={`bg-stone-500/0 focus-within:bg-emerald-500 focus-within:border-emerald-500 w-full my-1 rounded-full`}
-                  >
-                    {option}
-                  </Button>
-                ))}
-              </div>
-            )}
-          </div>
-          <div className={"flex flex-col justify-center my-2"}>
-            <Carousel_Images />
+        <p
+          className="line-clamp-6 text-sm font-light text-right pl-14 z-50"
+          dir="auto"
+        >
+          {contents}
+        </p>
+        <section className={`flex justify-end items-center py-3 *:z-10 z-10`}>
+          <div className={`flex justify-center items-center flex-col gap-3 w-4/5 *:w-full *:rounded-full hover:*:bg-blue-700 hover:*:text-white focus-within:*:border-blue-500`}>
+            {option_one &&
+              <Button
+                variant={"default"}
+                size={"lg"}
+                className={`${user_vote === `option_one` && `bg-blue-700 text-white`}`}
+              >
+                {option_one}
+              </Button>
+            }
+            {option_two &&
+              <Button
+                variant={"default"}
+                size={"lg"}
+                className={`${user_vote === `option_two` && `bg-blue-700 text-white`}`}
+
+              >
+                {option_two}
+              </Button>
+            }
+            {option_three &&
+              <Button
+                variant={"default"}
+                size={"lg"}
+                className={`${user_vote === `option_three` && `bg-blue-700 text-white`}`}
+
+              >
+                {option_three}
+              </Button>
+            }
+            {option_four &&
+              <Button
+                variant={"default"}
+                size={"lg"}
+                className={`${user_vote === `option_four` && `bg-blue-700 text-white`}`}
+
+              >
+                {option_four}
+              </Button>
+            }
           </div>
         </section>
 
+        <div className={"flex flex-col justify-center my-2"}>
+          <Carousel_Images />
+        </div>
+
         <section className={`flex justify-between items-center pl-10 py-1 *:z-10 z-10`}>
           <div className={`flex gap-2 items-center justify-center`}>
-            <SaveBTN post_id={id} likes={likes} userID={id_user} />
-            <span className="p-2 hover:bg-stone-800 rounded-full">
+            <SaveBTN post_id={id} user={user} user_liked={user_liked} />
+            <Link href={`/${username_user}/${id}`} className="p-2 hover:bg-stone-800 hover:text-green-500 rounded-full">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -156,26 +193,16 @@ export default function Card({
                   d="M12 20.25c4.97 0 9-3.694 9-8.25s-4.03-8.25-9-8.25S3 7.444 3 12c0 2.104.859 4.023 2.273 5.48.432.447.74 1.04.586 1.641a4.483 4.483 0 0 1-.923 1.785A5.969 5.969 0 0 0 6 21c1.282 0 2.47-.402 3.445-1.087.81.22 1.668.337 2.555.337Z"
                 />
               </svg>
-            </span>
+            </Link>
           </div>
-          <span className="p-2 hover:bg-stone-800 rounded-full">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth={1.5}
-              stroke="currentColor"
-              className="size-6"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M12 20.25c4.97 0 9-3.694 9-8.25s-4.03-8.25-9-8.25S3 7.444 3 12c0 2.104.859 4.023 2.273 5.48.432.447.74 1.04.586 1.641a4.483 4.483 0 0 1-.923 1.785A5.969 5.969 0 0 0 6 21c1.282 0 2.47-.402 3.445-1.087.81.22 1.668.337 2.555.337Z"
-              />
+          <span className="p-2 hover:bg-stone-800 hover:text-sky-500 rounded-full">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-5">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M6 12 3.269 3.125A59.769 59.769 0 0 1 21.485 12 59.768 59.768 0 0 1 3.27 20.875L5.999 12Zm0 0h7.5" />
             </svg>
           </span>
         </section>
       </main>
+      {/* <hr /> */}
     </div>
   );
 

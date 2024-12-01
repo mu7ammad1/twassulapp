@@ -2,77 +2,50 @@
 import { useState, useEffect } from "react";
 import { createClient } from "@/utils/supabase/client";
 import { SubmitButton } from "@/app/login/submit-button";
-import LoadingSkeleton from "./_comment/LoadingSkeleton";
 
-export default function SaveBTN({ post_id }: any) {
-  const [isLiked, setIsLiked] = useState(false);
-  const [loading, setLoading] = useState(true);
-  const [user, setUser] = useState<any>(null);
+export default function SaveBTN({ post_id, user_liked, user }: any) {
+  const [isLiked, setIsLiked] = useState(user_liked);
 
   const supabase = createClient();
-  useEffect(() => {
-    // تحقق مما إذا كان المستخدم مسجل الدخول وقم بجلب حالة الإعجاب
-    const fetchLikeStatus = async () => {
-      const {
-        data: { user },
-      } = await supabase.auth.getUser();
 
-      if (user) {
-        setUser(user);
 
-        // التحقق مما إذا كان المستخدم قد أعجب بالفعل بالمنشور
-        const { data: likeData } = await supabase
-          .from("like")
-          .select("*")
-          .eq("post_id", post_id)
-          .eq("user_id", user.id)
-          .single();
 
-        if (likeData) {
-          setIsLiked(true);
-        }
-      }
 
-      setLoading(false);
-    };
+  const handleLiked = async () => {
+    const { error, status } = await supabase
+      .from("likes")
+      .insert({ post_id: post_id, user_id: user });
 
-    fetchLikeStatus();
-  }, [post_id, supabase]);
-
-  const handleLikeToggle = async () => {
-    if (!user) return; // التأكد من وجود المستخدم قبل تنفيذ العملية
-
-    if (isLiked) {
-      // إلغاء الإعجاب
-      const { error } = await supabase
-        .from("like")
-        .delete()
-        .eq("post_id", post_id)
-        .eq("user_id", user.id);
-
-      if (!error) {
-        setIsLiked(false);
-      }
-    } else {
-      // إضافة إعجاب
-      const { error } = await supabase
-        .from("like")
-        .insert({ post_id: post_id, user_id: user.id });
-
-      if (!error) {
-        setIsLiked(true);
-      }
+    if (!error) {
+      setIsLiked(true);
     }
-  };
+    if (status) {
+      console.log(status);
 
-  if (loading) {
-    return <LoadingSkeleton size={`1.2em`} />;
+    }
   }
+
+
+  const handleDeleteLiked = async () => {
+    // إلغاء الإعجاب
+    const { error, status } = await supabase
+      .from("likes")
+      .delete()
+      .eq("post_id", post_id)
+      .eq("user_id", user);
+    console.log(status);
+
+    if (!error) {
+      setIsLiked(false);
+    }
+
+  }
+
 
   return (
     <form className={`flex gap-2 items-center justify-center`}>
       <SubmitButton
-        formAction={handleLikeToggle}
+        formAction={!isLiked ? handleLiked : handleDeleteLiked}
         pendingText={
           <span className="p-2 hover:bg-stone-800 rounded-full">
             <svg
@@ -93,7 +66,7 @@ export default function SaveBTN({ post_id }: any) {
         }
         className="flex items-center gap-1"
       >
-        <span className="p-2 hover:bg-stone-800 rounded-full">
+        <span className="p-2 hover:bg-stone-800 *:hover:text-red-500 rounded-full">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill={isLiked ? "red" : "none"} // يتغير اللون إلى الأحمر عند الإعجاب
@@ -113,3 +86,56 @@ export default function SaveBTN({ post_id }: any) {
     </form>
   );
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// follows = id,following_id,follower_id
+// reply = id,created_at,user_id,post_id
+// likes = id,created_at,user_id,post_id
+// comments = id,created_at,user_id,content,photo_urls,poll_options,poll_votes,post_id
+// profiles = id,update_at,username,full_name,avatar_url,bio,isValid,links
+// posts = id,created_at,user_id,content,photo_urls,published,poll_options,poll_votes,retch: '5000'::numeric
+
+
+
+
+
+
+
+
+
+
+
+
+

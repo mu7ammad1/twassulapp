@@ -32,7 +32,7 @@ export default async function Page({ params }: { params: { post: string } }) {
   const { data: post, error: postError } = await supabase
     .from("posts")
     .select(
-      "*, profiles(id,username, avatar_url,isValid,full_name,bio),like (*)"
+      "*, profiles(id,username, avatar_url,isValid,full_name,bio),likes (*)"
     )
 
     .eq("id", `${params.post}`)
