@@ -11,11 +11,12 @@ const ModeToggle = dynamic(() => import("../modeToggle"), {
 export default function Menu() {
   const pathname = usePathname();
   const profile = (
-    <Link href={`/profile`}>
+    <Link href={`/profile`} aria-label="logo">
       <Button
         variant="outline"
         size={"default"}
         className={`border-none rounded-2xl shadow-none text-lg py-7 bg-white/0`}
+        aria-label="logo"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
