@@ -59,14 +59,14 @@ export default function Card({
                   <div className={`flex`}>
                     <Avatar className="size-9 p-0">
                       <AvatarImage src={avatar} />
-                      <AvatarFallback>VC</AvatarFallback>
+                      <AvatarFallback>TW</AvatarFallback>
                     </Avatar>
                     {Valid === true ? (
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         viewBox="0 0 24 24"
                         fill="currentColor"
-                        className="size-5 -translate-x-3 translate-y-4 rounded-full bg-stone-900 z-10"
+                        className="size-5 -translate-x-3 translate-y-4 rounded-full dark:bg-stone-900 z-10"
                       >
                         <path
                           fillRule="evenodd"
@@ -131,9 +131,8 @@ export default function Card({
           <div className={`flex justify-center items-center flex-col gap-3 w-4/5 *:w-full *:rounded-full hover:*:bg-blue-700 hover:*:text-white focus-within:*:border-blue-500`}>
             {option_one &&
               <Button
-                variant={"default"}
                 size={"lg"}
-                className={`${user_vote === `option_one` && `bg-blue-700 text-white`}`}
+                className={`${user_vote === `option_one` ? `bg-blue-700 text-white` : `bg-stone-200 dark:bg-secondary text-secondary-foreground`}`}
               >
                 {option_one}
               </Button>
@@ -142,7 +141,7 @@ export default function Card({
               <Button
                 variant={"default"}
                 size={"lg"}
-                className={`${user_vote === `option_two` && `bg-blue-700 text-white`}`}
+                className={`${user_vote === `option_two` ? `bg-blue-700 text-white` : `bg-stone-200 dark:bg-secondary text-secondary-foreground`}`}
 
               >
                 {option_two}
@@ -152,7 +151,7 @@ export default function Card({
               <Button
                 variant={"default"}
                 size={"lg"}
-                className={`${user_vote === `option_three` && `bg-blue-700 text-white`}`}
+                className={`${user_vote === `option_three` ? `bg-blue-700 text-white` : `bg-stone-200 dark:bg-secondary text-secondary-foreground`}`}
 
               >
                 {option_three}
@@ -162,7 +161,7 @@ export default function Card({
               <Button
                 variant={"default"}
                 size={"lg"}
-                className={`${user_vote === `option_four` && `bg-blue-700 text-white`}`}
+                className={`${user_vote === `option_four` ? `bg-blue-700 text-white` : `bg-stone-200 dark:bg-secondary text-secondary-foreground`}`}
 
               >
                 {option_four}

@@ -5,6 +5,7 @@ import { createClient } from "@/utils/supabase/server";
 import AvatarProfile from "@/components/ux/avatarProfile";
 import FollowBTN from "./followBTN";
 import Card from "./card";
+import { Button } from "@/components/ui/button";
 
 export default async function Page({ params }: { params: { slug: string } }) {
   const supabase = createClient();
@@ -68,7 +69,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
         </section>
         <section
           className={cn(
-            `w-full my-3 text-right flex justify-center items-center gap-3`
+            `w-full my-5 text-right flex justify-center items-center gap-3`
           )}
         >
           <FollowBTN username={profile?.id} initialLength={follow?.length} />
@@ -80,11 +81,11 @@ export default async function Page({ params }: { params: { slug: string } }) {
         >
           <Tabs defaultValue="manshorat" className="w-full">
             <TabsList
-              className={`w-full bg-stone-500/0 border-spacing-4 border-b-2 border-stone-800 rounded-none gap-5 text-white pb-5`}
+              className={`w-full bg-stone-500/0 border-spacing-0 border-b-0  gap-5`}
             >
               <TabsTrigger
                 value="clips"
-                className={`w-full bg-white/0 focus-visible:bg-stone-500`}
+                className={`w-full visible:bg-red-500 focus-visible:bg-stone-0 focus-visible:shadow-none shadow-none .data-\[state\=inactive\]\:shadow-sm[data-state=inactive]`}
               >
                 clap
               </TabsTrigger>
@@ -105,7 +106,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
                   `w-full mt-2 text-left flex-col flex justify-center items-center gap-2`
                 )}
               >
-                {profile?.posts == 0 && `لا يوجد منشورات`}
+                {profile?.posts == 0 && `لا يوجد منشورات حاليا`}
                 {profile?.posts?.map(
                   ({
                     id,
@@ -136,8 +137,12 @@ export default async function Page({ params }: { params: { slug: string } }) {
                 )}
               </section>
             </TabsContent>
-            <TabsContent value="clips">clips........</TabsContent>
-            <TabsContent value="reply">reply........</TabsContent>
+            <TabsContent value="clips">
+              {profile?.posts == 0 && `لا يوجد ردود حاليا`}
+            </TabsContent>
+            <TabsContent value="reply">
+              {profile?.posts == 0 && `لا يوجد اعادة نشر حاليا`}
+            </TabsContent>
           </Tabs>
         </section>
       </div>
