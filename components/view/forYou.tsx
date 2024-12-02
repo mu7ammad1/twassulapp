@@ -7,14 +7,13 @@ export default async function ForYou() {
   const {
     data: { user },
   } = await supabase.auth.getUser();
-
-  const { data, error } = await supabase
+  const kk = user ? supabase
     .rpc('get_user_posts', {
       target_user_id: user?.id
-    });
+    }) : supabase.from("posts_with_stats").select("*")
 
 
-  if (!user) return `محتاج تسجيل دخول اولا`; // التأكد من وجود المستخدم قبل تنفيذ العملية
+  const { data, error } = await kk
 
 
   if (error) {
@@ -51,27 +50,6 @@ export default async function ForYou() {
           />
         </div>
       ))}
-
-
-      {/* {posts?.map((post, id) => (
-        <div key={id} className="w-full h-full first:border-none gap-5">
-          <Card
-            pollOptions={post.poll_options}
-            id={post.id}
-            created={post.created_at}
-            id_user={post.profiles.id}
-            username_user={post.profiles.username}
-            contents={post.content}
-            photos={post.photo_urls}
-            publish={post.published}
-            avatar={post.profiles?.avatar_url}
-            Valid={post.profiles.isValid}
-            likes={post.likes.length}
-            full_name={post.profiles.full_name}
-            bio={post.profiles.bio}
-          />
-        </div>
-      ))} */}
     </main>
   );
 }

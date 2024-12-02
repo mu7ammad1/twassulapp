@@ -15,7 +15,7 @@ import {
   HoverCardContent,
   HoverCardTrigger,
 } from "@/components/ui/hover-card";
-import { CalendarIcon, LucideGitCommitVertical, ParkingCircle } from "lucide-react";
+import { CalendarIcon, ParkingCircle } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import SaveBTN from "./SaveBTN";
 
@@ -175,7 +175,7 @@ export default function Card({
           <Carousel_Images />
         </div>
 
-        <section className={`flex justify-between items-center pl-10 py-1 *:z-10 z-10`}>
+        <section className={`flex justify-between items-center pl-7 py-1 *:z-10 z-10`}>
           <div className={`flex gap-2 items-center justify-center`}>
             <SaveBTN post_id={id} user={user} user_liked={user_liked} />
             <Link href={`/${username_user}/${id}`} className="p-2 hover:bg-stone-800 hover:text-green-500 rounded-full">
@@ -202,14 +202,14 @@ export default function Card({
           </span>
         </section>
       </main>
-      {/* <hr /> */}
+      <hr className="my-2" />
     </div>
   );
 
   function Carousel_Images() {
     return (
       <Carousel className="basis-full ">
-        <CarouselContent className="w-full h-full pl-10">
+        <CarouselContent className="w-full h-full pl-7">
           {photos?.map((id: string) => (
             <CarouselItem key={id} className="basis-auto">
               <Dialog>
@@ -232,34 +232,12 @@ export default function Card({
                             src={photoId}
                             alt={`Image ${id}`}
                             loading="eager"
-                            className="h-full w-full max-w-full max-h-[80vh] object-contain object-center rounded-3xl"
+                            className="h-full w-full max-w-full max-h-[80vh] object-contain object-center rounded-3xl max-sm:max-h-full"
                           />
                         </CarouselItem>
                       ))}
                     </CarouselContent>
                   </Carousel>
-                  <div
-                    className={`flex justify-center items-end gap-5 h-16 w-full`}
-                  >
-                    <div
-                      className={`flex justify-center items-center gap-5 bg-stone-800 pr-3 pl-3 py-3 rounded-full`}
-                    >
-                      <Avatar>
-                        <AvatarImage src={avatar} />
-                        <AvatarFallback>VC</AvatarFallback>
-                      </Avatar>
-                      <Button
-                        variant="destructive"
-                        size={"icon"}
-                        className="rounded-full"
-                      >
-                        <LucideGitCommitVertical
-                          absoluteStrokeWidth
-                          size={32}
-                        />
-                      </Button>
-                    </div>
-                  </div>
                 </DialogContent>
               </Dialog>
             </CarouselItem>
